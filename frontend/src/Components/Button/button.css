@@ -1,0 +1,16 @@
+@font-face {
+  font-family: LEMONMILK;
+  src: url('../../assets/fonts/LEMONMILK/LEMONMILK-Light.otf');
+}
+
+button {
+  width: 80%;
+  padding: 24px 99px;
+  font-size: 14px;
+  font-family: 'LEMONMILK',Helvetica, Arial;
+  box-shadow: 1px 1px 30px rgba(0,0,0,0.20);
+  border: none;
+}
+button:hover {
+  background-color: aqua;
+}
