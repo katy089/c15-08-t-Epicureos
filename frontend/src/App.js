@@ -1,15 +1,10 @@
 import "./App.css";
-import Button from "../src/Components/Button/Button";
-import { mainColors } from "./assets/colors";
+import Login from "./Pages/Login";
 
 function App() {
   return (
     <div className="App">
-      <Button
-        bColor={mainColors.primaryColor}
-        tColor={mainColors.textColor}
-        text={"REGISTRATE"}
-      ></Button>
+      <Login></Login>
     </div>
   );
 }
