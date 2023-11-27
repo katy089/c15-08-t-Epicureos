@@ -12,5 +12,5 @@ button {
   border: none;
 }
 button:hover {
-  background-color: aqua;
+  font-weight: 500;
 }
