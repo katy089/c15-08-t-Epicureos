@@ -7,6 +7,8 @@ const sequelize = new Sequelize(POSTGRES_URL, {
 })
 
 const connectionDatabase = (force) => {
+    const User = require('../models/user.model')
+
     sequelize
        .sync({force})
        .then(() => console.log('db is conected'))
