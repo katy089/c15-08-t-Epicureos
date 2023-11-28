@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./button.css";
 
 function Button(props) {
-  const { bColor, tColor, text, iColor } = props;
+  const { bColor, tColor, text, iColor, click } = props;
   const [isHover, setIsHover] = useState();
   const buttonStyle = {
     backgroundColor: isHover ? iColor : bColor,
@@ -20,6 +20,7 @@ function Button(props) {
       style={buttonStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={click}
     >
       {text}
     </button>
