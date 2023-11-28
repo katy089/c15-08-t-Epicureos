@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Components/Button/Button";
 import { mainColors } from "../assets/colors.js";
 import { InputMail, InputPass } from "../Components/Input/Input.jsx";
+
 function Login() {
   return (
     <div
@@ -31,12 +32,12 @@ function Login() {
       >
         <h2
           style={{
-            fontFamily: "Marcellus",
+            fontFamily: "LEMONMILK",
             fontWeight: "300",
             fontSize: "14px",
           }}
         >
-          ¿YA TENÉS UNA CUENTA? INGRESÁ
+          ¿NO TENÉS UNA CUENTA? REGISTRATE
         </h2>
       </a>
       <InputMail></InputMail>
@@ -55,7 +56,7 @@ function Login() {
       >
         <h2
           style={{
-            fontFamily: "Marcellus",
+            fontFamily: "LEMONMILK",
             fontWeight: "300",
             fontSize: "12px",
           }}
