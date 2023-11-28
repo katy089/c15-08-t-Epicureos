@@ -30,6 +30,7 @@ function Login() {
       <Button
         bColor={mainColors.primaryColor}
         tColor={mainColors.textColor}
+        iColor={mainColors.inactiveColor}
         text={"INICIAR SESIÓN"}
       ></Button>
     </div>

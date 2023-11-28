@@ -6,8 +6,6 @@ button {
   box-shadow: 1px 1px 30px rgba(0,0,0,0.20);
   border: none;
   white-space:nowrap; 
+  cursor: pointer;
 }
 
-button:hover {
-  background-color: white;
-}
