@@ -8,7 +8,7 @@ button {
   white-space:nowrap; 
   cursor: pointer;
   text-align: center;
-
+  user-select: none;
   opacity: 1;
   transition: opacity 100ms ease-in-out;
 }

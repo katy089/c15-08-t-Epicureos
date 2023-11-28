@@ -23,7 +23,11 @@ function Login() {
       </h1>
       <a
         href="#2"
-        style={{ textDecoration: "none", color: mainColors.primaryColor }}
+        style={{
+          textDecoration: "none",
+          color: mainColors.primaryColor,
+          marginBottom: "20px",
+        }}
       >
         <h2
           style={{
@@ -46,6 +50,7 @@ function Login() {
           textAlign: "left",
           textDecoration: "none",
           color: mainColors.primaryColor,
+          marginBottom: "20px",
         }}
       >
         <h2
@@ -64,6 +69,7 @@ function Login() {
         tColor={mainColors.textColor}
         iColor={mainColors.inactiveColor}
         text={"INICIAR SESIÓN"}
+        click={() => console.log("Sign in")}
       ></Button>
     </div>
   );
