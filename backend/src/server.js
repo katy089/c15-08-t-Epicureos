@@ -13,8 +13,8 @@ if(process.env.DEV) {
 server.use(cors())
 server.use(express.json())
 
-// server.use('/api', require('./routes/api.routes'))
-server.use('/api', ()=>{console.log('Hola, soy una ruta')})
+server.use('/api/v1', require('./routes/api.routes'))
+
 
 module.exports = server
 
