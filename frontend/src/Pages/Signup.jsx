@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../Components/Input/Input.jsx";
+import Button from "../Components/Button/Button.jsx";
 import { mainColors } from "../assets/colors.js";
 import { InputNom,InputTel, InputMail, InputPass } from "../Components/Input/Input.jsx";
 
@@ -30,12 +30,12 @@ function Signup() {
         >
           <h2
             style={{
-              fontFamily: "Marcellus",
+              fontFamily: "LEMONMILK",
               fontWeight: "300",
               fontSize: "14px",
             }}
           >
-            ¿NO TENÉS UNA CUENTA? REGISTRATE 
+            YA TIENES UNA CUENTA INICIA SESIÓN
           </h2>
         </a>
         <InputNom></InputNom>
@@ -55,7 +55,7 @@ function Signup() {
         >
           <h2
             style={{
-              fontFamily: "Marcellus",
+              fontFamily: "LEMONMILK",
               fontWeight: "300",
               fontSize: "12px",
             }}
@@ -64,12 +64,12 @@ function Signup() {
           </h2>
         </a>
   
-        <Input
+        <Button
           bColor={mainColors.primaryColor}
           tColor={mainColors.textColor}
           iColor={mainColors.inactiveColor}
           text={"REGISTRATE"}
-        ></Input>
+        ></Button>
       </div>
     );
   }
