@@ -3,11 +3,11 @@ const cors = require('cors')
 
 const server = express()
 
-// if(process.env.DEV) {
-//     console.log('DEVELOPMENT-MODE!!!')
-//     const morgan = require('morgan')
-//     server.use(morgan('dev'))
-// }
+if(process.env.DEV) {
+    console.log('DEVELOPMENT-MODE!!!')
+    const morgan = require('morgan')
+    server.use(morgan('dev'))
+}
 
 // Middlewares
 server.use(cors())
