@@ -40,8 +40,10 @@ function Login() {
       <a
         href="#2"
         style={{
-          alignSelf: "flex-start",
-          marginLeft: "minmax(9%, 39vw)",
+          maxWidth: "400px",
+          width: "80%",
+          alignSelf: "center",
+          textAlign: "left",
           textDecoration: "none",
           color: mainColors.primaryColor,
         }}
