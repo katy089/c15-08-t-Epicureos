@@ -8,7 +8,6 @@ function Signup() {
     return (
       <div
         style={{
-
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -20,7 +19,11 @@ function Signup() {
         }}
       >
         <h1
-          style={{ fontFamily: "Marcellus", fontWeight: "300", fontSize: "35px" }}
+          style={{
+            fontFamily: "Marcellus",
+            fontWeight: "300",
+            fontSize: "35px",
+          }}
         >
           Lorem Ipsum
         </h1>
@@ -35,7 +38,7 @@ function Signup() {
               fontSize: "14px",
             }}
           >
-            YA TIENES UNA CUENTA INICIA SESIÓN
+            ¿YA TENÉS UNA CUENTA? INICIA SESIÓN
           </h2>
         </a>
         <InputNom></InputNom>
@@ -63,7 +66,7 @@ function Signup() {
             ¿OLVIDASTE TU CONTRASEÑA?
           </h2>
         </a>
-  
+
         <Button
           bColor={mainColors.primaryColor}
           tColor={mainColors.textColor}
