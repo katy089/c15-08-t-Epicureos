@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Components/Button/Button";
 import { mainColors } from "../assets/colors.js";
 import { InputMail, InputPass } from "../Components/Input/Input.jsx";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -9,7 +10,7 @@ function Login() {
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        height: "100vh",
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -22,8 +23,8 @@ function Login() {
       >
         Lorem Ipsum
       </h1>
-      <a
-        href="#2"
+      <Link
+        to={"/"}
         style={{
           textDecoration: "none",
           color: mainColors.primaryColor,
@@ -39,7 +40,7 @@ function Login() {
         >
           ¿NO TENÉS UNA CUENTA? REGISTRATE
         </h2>
-      </a>
+      </Link>
       <InputMail></InputMail>
       <InputPass></InputPass>
       <a
