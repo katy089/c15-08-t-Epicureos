@@ -5,7 +5,8 @@ const registerService = async (body) => {
     const {
         email,
         firstname,
-        lastname
+        lastname,
+        password
     } = body
     const verifyEmail = await findEmail(email)
     if (verifyEmail) {
