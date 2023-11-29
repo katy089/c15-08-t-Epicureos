@@ -1,10 +1,10 @@
-const { tokenController } = require('../controllers/auth.controller')
+const { registerTokenController } = require('../controllers/auth.controller')
 
 const { Router } = require('express')
 
 const router = Router()
 
-router.use('/register', tokenController)
+router.use('/register', registerTokenController)
 
 router.use('/login', () => { console.log('login') })
 
