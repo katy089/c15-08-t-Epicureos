@@ -14,7 +14,7 @@ const Input = ({ type, label, value, onChange, validation = true }) => {
             ? { backgroundColor: "#F6F6F6" }
             : {
                 backgroundColor: mainColors.inactiveColor,
-                color: mainColors.secondaryColor,
+                color: mainColors.textColor,
               }
         }
         type={type}

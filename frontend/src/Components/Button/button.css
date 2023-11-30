@@ -1,9 +1,9 @@
 button {
   width: min(80%, 400px);
-  padding: 24px 60px;
-  font-size: 14px;
+  padding: 16px 60px;
+  font-size: 12px;
   font-family: 'LEMONMILK',Helvetica, Arial;
-  box-shadow: 1px 1px 30px rgba(0,0,0,0.20);
+  box-shadow: 1px 1px 25px 2px rgba(37,37,37,0.45);
   border: none;
   white-space:nowrap; 
   cursor: pointer;
@@ -11,6 +11,7 @@ button {
   user-select: none;
   opacity: 1;
   transition: opacity 100ms ease-in-out;
+  font-weight: 300;
 }
 
 button:active {

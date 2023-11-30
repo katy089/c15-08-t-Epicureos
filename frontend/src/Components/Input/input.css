@@ -2,7 +2,7 @@
   background-color: "#F6F6F6";
   display: flex;
   width: min(80%, 400px);
-  border: 1px #929292 solid;
+  border: 1px #3A2521 solid;
   justify-content: center;
   align-items: center;
 }
@@ -18,7 +18,7 @@ input {
   border-radius: 0;
   text-decoration: none;
   width: 100%;
-  padding: 24px 17px;
-  font-size: 14px;
+  padding: 16px 17px;
+  font-size: 12px;
   font-family: 'LEMONMILK',Helvetica, Arial;
 }

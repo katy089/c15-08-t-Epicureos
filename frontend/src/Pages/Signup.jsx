@@ -3,7 +3,8 @@ import Button from "../Components/Button/Button.jsx";
 import { mainColors } from "../assets/colors.js";
 import { InputNom,InputTel, InputMail, InputPass } from "../Components/Input/Input.jsx";
 import { Link } from "react-router-dom";
-
+import BImage from "../assets/images/backgroundimage.png";
+import Icon from "../assets/images/icon.png";
 function Signup() {
   return (
     <div
@@ -12,63 +13,58 @@ function Signup() {
         flexDirection: "column",
         height: "100vh",
         width: "100%",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: mainColors.secondaryColor,
-        gap: "10px",
+        backgroundColor: mainColors.secondaryColorO,
+        gap: "11px",
+        overflow: "hidden",
       }}
     >
-      <h1
+      <img
+        src={Icon}
         style={{
-          fontFamily: "Marcellus",
-          fontWeight: "300",
-          fontSize: "35px",
+          paddingTop: "24px",
+          height: "190px",
+          marginBottom: "10px",
         }}
-      >
-        Lorem Ipsum
-      </h1>
+        alt="Epicureos"
+      ></img>
+      <img
+        alt="Background"
+        src={BImage}
+        style={{
+          position: "absolute",
+          zIndex: "-1",
+          width: "100vw",
+          height: "100vh",
+        }}
+      />
       <Link
         to={"/login"}
         style={{ textDecoration: "none", color: mainColors.primaryColor }}
       >
         <h2
           style={{
-            fontFamily: "LEMONMILK",
+            fontFamily: "Marcellus",
             fontWeight: "300",
-            fontSize: "14px",
+            fontSize: "15px",
+            marginBottom: "20px",
+            color: mainColors.primaryColor,
           }}
         >
-          ¿YA TENÉS UNA CUENTA? INICIA SESIÓN
+          ¿Ya tenés una cuenta?{" "}
+          <span style={{ textDecoration: "underline" }}>Ingresa</span>
         </h2>
       </Link>
       <InputNom></InputNom>
       <InputTel></InputTel>
       <InputMail></InputMail>
       <InputPass></InputPass>
-      <a
-        href="#2"
-        style={{
-          maxWidth: "400px",
-          width: "80%",
-          alignSelf: "center",
-          textAlign: "left",
-          textDecoration: "none",
-          color: mainColors.primaryColor,
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "LEMONMILK",
-            fontWeight: "300",
-            fontSize: "12px",
-          }}
-        >
-          ¿OLVIDASTE TU CONTRASEÑA?
-        </h2>
-      </a>
+
+      <div style={{ paddingTop: "27px" }}></div>
 
       <Button
-        bColor={mainColors.primaryColor}
+        bColor={mainColors.buttonColor}
         tColor={mainColors.textColor}
         iColor={mainColors.inactiveColor}
         text={"REGISTRATE"}
