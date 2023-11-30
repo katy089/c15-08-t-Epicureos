@@ -63,7 +63,7 @@ function Login() {
       <img
         src={Icon}
         style={{
-          paddingTop: "24px",
+          paddingTop: "30px",
           height: "190px",
           marginBottom: "10px",
         }}
@@ -123,7 +123,7 @@ function Login() {
         text={
           loading ? (
             <Spinner
-              size={10.5}
+              size={11.2}
               color={mainColors.textColor}
               style={{ textAlign: "center" }}
             />
