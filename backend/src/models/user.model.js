@@ -23,8 +23,10 @@ User.init({
     },
     password: {
         type: DataTypes.STRING
+    },
+    phone: {
+        type: DataTypes.STRING
     }
-
 },
 {
     sequelize,
