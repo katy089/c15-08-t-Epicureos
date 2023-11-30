@@ -12,6 +12,9 @@ button {
   opacity: 1;
   transition: opacity 100ms ease-in-out;
   font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 button:active {

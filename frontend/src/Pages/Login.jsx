@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Components/Button/Button";
 import { mainColors } from "../assets/colors.js";
 import { InputMail, InputPass } from "../Components/Input/Input.jsx";
 import { Link } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
+import { Spinner } from "react-activity";
+import "react-activity/dist/library.css";
 function Login() {
+  const [mail, setMail] = useState("");
+  const [pass, setPass] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogIn = async () => {
+    console.log(mail, pass);
+    setLoading(true);
+    await fetch(`https://restaurant-c2gx.onrender.com/api/v1/auth/login/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: mail, password: pass }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log("User Logged");
+          setLoading(false);
+        }
+        if (response.status === 400) {
+          console.log("User doesnt exist");
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div
       style={{
@@ -62,8 +90,8 @@ function Login() {
           <span style={{ textDecoration: "underline" }}>Registrate</span>
         </h2>
       </Link>
-      <InputMail></InputMail>
-      <InputPass></InputPass>
+      <InputMail mail={mail} setMail={setMail}></InputMail>
+      <InputPass pass={pass} setPass={setPass}></InputPass>
       <a
         href="#2"
         style={{
@@ -88,13 +116,22 @@ function Login() {
           ¿OLVIDASTE TU CONTRASEÑA?
         </h2>
       </a>
-
       <Button
         bColor={mainColors.buttonColor}
         tColor={mainColors.textColor}
         iColor={mainColors.inactiveColor}
-        text={"INICIAR SESIÓN"}
-        click={() => console.log("Sign in")}
+        text={
+          loading ? (
+            <Spinner
+              size={10.5}
+              color={mainColors.textColor}
+              style={{ textAlign: "center" }}
+            />
+          ) : (
+            "INICIAR SESIÓN"
+          )
+        }
+        click={() => handleLogIn()}
       ></Button>
     </div>
   );

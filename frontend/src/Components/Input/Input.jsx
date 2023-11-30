@@ -27,9 +27,7 @@ const Input = ({ type, label, value, onChange, validation = true }) => {
   );
 };
 
-export const InputNom = () => {
-  const [nom, setNom] = useState("");
-
+export const InputNom = ({ nom, setNom }) => {
   const onChangeNom = (event) => {
     setNom(event.target.value);
   };
@@ -39,9 +37,7 @@ export const InputNom = () => {
   );
 };
 
-export const InputTel = () => {
-  const [tel, setTel] = useState("");
-
+export const InputTel = ({ tel, setTel }) => {
   const onChangeTel = (event) => {
     setTel(event.target.value);
   };
@@ -51,9 +47,7 @@ export const InputTel = () => {
   );
 };
 
-export const InputMail = () => {
-  const [mail, setMail] = useState("");
-
+export const InputMail = ({ mail, setMail }) => {
   const onChangeMail = (event) => {
     setMail(event.target.value);
   };
@@ -63,9 +57,9 @@ export const InputMail = () => {
   );
 };
 
-export const InputPass = () => {
+export const InputPass = ({ pass, setPass }) => {
   const [error, setError] = useState(true);
-  const [pass, setPass] = useState("");
+
   const validate = (value) => {
     setError(false);
     if (

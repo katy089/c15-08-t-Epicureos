@@ -1,11 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Components/Button/Button.jsx";
 import { mainColors } from "../assets/colors.js";
-import { InputNom,InputTel, InputMail, InputPass } from "../Components/Input/Input.jsx";
+import {
+  InputNom,
+  InputTel,
+  InputMail,
+  InputPass,
+} from "../Components/Input/Input.jsx";
 import { Link } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
+import { Spinner } from "react-activity";
+import "react-activity/dist/library.css";
 function Signup() {
+  const [mail, setMail] = useState("");
+  const [pass, setPass] = useState("");
+  const [nom, setNom] = useState("");
+  const [tel, setTel] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = async () => {
+    console.log(mail, pass, nom, tel);
+    setLoading(true);
+    await fetch(`https://restaurant-c2gx.onrender.com/api/v1/auth/register/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: mail,
+        password: pass,
+        phone: tel,
+        firstname: nom,
+        lastname: nom,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log("User Logged");
+          setLoading(false);
+        }
+        if (response.status === 400) {
+          console.log("User already exists");
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div
       style={{
@@ -56,10 +97,10 @@ function Signup() {
           <span style={{ textDecoration: "underline" }}>Ingresa</span>
         </h2>
       </Link>
-      <InputNom></InputNom>
-      <InputTel></InputTel>
-      <InputMail></InputMail>
-      <InputPass></InputPass>
+      <InputNom nom={nom} setNom={setNom}></InputNom>
+      <InputTel tel={tel} setTel={setTel}></InputTel>
+      <InputMail mail={mail} setMail={setMail}></InputMail>
+      <InputPass pass={pass} setPass={setPass}></InputPass>
 
       <div style={{ paddingTop: "27px" }}></div>
 
@@ -67,11 +108,21 @@ function Signup() {
         bColor={mainColors.buttonColor}
         tColor={mainColors.textColor}
         iColor={mainColors.inactiveColor}
-        text={"REGISTRATE"}
+        text={
+          loading ? (
+            <Spinner
+              size={10.5}
+              color={mainColors.textColor}
+              style={{ textAlign: "center" }}
+            />
+          ) : (
+            "REGISTRATE"
+          )
+        }
+        click={() => handleSignup()}
       ></Button>
     </div>
   );
 }
-  
-  export default Signup;
-  
+
+export default Signup;
