@@ -10,17 +10,43 @@ import {
 import { Link } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
+
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+
+import validator from "validator";
 function Signup() {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
-  const [nom, setNom] = useState("");
+  const [lastNom, setLastNom] = useState("");
+  const [firstNom, setFirstNom] = useState("");
   const [tel, setTel] = useState("");
   const [loading, setLoading] = useState(false);
+  const [camposVacios, setCamposVacios] = useState(false);
+
+  const checkHandleSignup = () => {
+    if (
+      validator.isEmail(mail) &&
+      validator.isStrongPassword(pass, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      }) &&
+      validator.isMobilePhone(tel.trim(), ["es-AR", "es-MX"]) &&
+      firstNom.length > 0 &&
+      lastNom.length >= 0
+    ) {
+      handleSignup();
+      setCamposVacios(false);
+    } else {
+      setCamposVacios(true);
+    }
+  };
 
   const handleSignup = async () => {
-    console.log(mail, pass, nom, tel);
+    console.log(mail, pass, firstNom, tel, lastNom);
     setLoading(true);
     await fetch(`https://restaurant-c2gx.onrender.com/api/v1/auth/register/`, {
       method: "POST",
@@ -28,11 +54,11 @@ function Signup() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: mail,
+        email: mail.toLowerCase(),
         password: pass,
-        phone: tel,
-        firstname: nom,
-        lastname: nom,
+        phone: tel.trim(),
+        firstname: firstNom.toUpperCase(),
+        lastname: lastNom.toUpperCase(),
       }),
     })
       .then((response) => {
@@ -54,7 +80,7 @@ function Signup() {
         flexDirection: "column",
         height: "100vh",
         width: "100%",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
         backgroundColor: mainColors.secondaryColorO,
         gap: "10px",
@@ -64,7 +90,7 @@ function Signup() {
       <img
         src={Icon}
         style={{
-          paddingTop: "30px",
+          paddingTop: "0px",
           height: "190px",
           marginBottom: "10px",
         }}
@@ -88,7 +114,7 @@ function Signup() {
           style={{
             fontFamily: "Marcellus",
             fontWeight: "300",
-            fontSize: "15px",
+            fontSize: "16px",
             marginBottom: "20px",
             color: mainColors.primaryColor,
           }}
@@ -97,7 +123,42 @@ function Signup() {
           <span style={{ textDecoration: "underline" }}>Ingresa</span>
         </h2>
       </Link>
-      <InputNom nom={nom} setNom={setNom}></InputNom>
+      {camposVacios && (
+        <h2
+          style={{
+            fontFamily: "Marcellus",
+            fontWeight: "300",
+            fontSize: "12px",
+            marginBottom: "10px",
+            color: mainColors.primaryColor,
+          }}
+        >
+          Favor de llenar todos los campos
+        </h2>
+      )}
+      <div
+        style={{
+          display: "flex",
+          padding: "0",
+          gap: "10px",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <InputNom
+          label={"Nombre"}
+          nom={firstNom}
+          setNom={setFirstNom}
+        ></InputNom>
+        <InputNom
+          label={"Apellido"}
+          nom={lastNom}
+          setNom={setLastNom}
+        ></InputNom>
+      </div>
+
       <InputTel tel={tel} setTel={setTel}></InputTel>
       <InputMail mail={mail} setMail={setMail}></InputMail>
       <InputPass pass={pass} setPass={setPass}></InputPass>
@@ -119,7 +180,7 @@ function Signup() {
             "REGISTRATE"
           )
         }
-        click={() => handleSignup()}
+        click={() => checkHandleSignup()}
       ></Button>
     </div>
   );

@@ -6,7 +6,7 @@ import { mainColors } from "../../assets/colors";
 
 const Input = ({ type, label, value, onChange, validation = true }) => {
   return (
-    <div className="input-container ">
+    <div className="input-container input1">
       {/*<label htmlFor={type}>{label}</label>*/}
       <input
         style={
@@ -27,14 +27,12 @@ const Input = ({ type, label, value, onChange, validation = true }) => {
   );
 };
 
-export const InputNom = ({ nom, setNom }) => {
+export const InputNom = ({ nom, setNom, label }) => {
   const onChangeNom = (event) => {
     setNom(event.target.value);
   };
 
-  return (
-    <Input type="text" label="Nombre" value={nom} onChange={onChangeNom} />
-  );
+  return <Input type="text" label={label} value={nom} onChange={onChangeNom} />;
 };
 
 export const InputTel = ({ tel, setTel }) => {

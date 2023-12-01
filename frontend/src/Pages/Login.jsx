@@ -5,13 +5,28 @@ import { InputMail, InputPass } from "../Components/Input/Input.jsx";
 import { Link } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
+
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+
+import validator from "validator";
 function Login() {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const [loading, setLoading] = useState(false);
+  const [camposVacios, setCamposVacios] = useState(false);
+  const [loginFail, setLoginFail] = useState(false);
 
+  const checkHandleLogin = () => {
+    if (validator.isEmail(mail) && pass.length > 0) {
+      handleLogIn();
+      setCamposVacios(false);
+      setLoginFail(false);
+    } else {
+      setCamposVacios(true);
+      setLoginFail(false);
+    }
+  };
   const handleLogIn = async () => {
     console.log(mail, pass);
     setLoading(true);
@@ -20,15 +35,18 @@ function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: mail, password: pass }),
+      body: JSON.stringify({ email: mail.toLowerCase(), password: pass }),
     })
       .then((response) => {
         if (response.status === 201) {
           console.log("User Logged");
+          alert("User Logged");
           setLoading(false);
+          setLoginFail(false);
         }
         if (response.status === 400) {
           console.log("User doesnt exist");
+          setLoginFail(true);
           setLoading(false);
         }
       })
@@ -41,7 +59,7 @@ function Login() {
         flexDirection: "column",
         height: "100vh",
         width: "100%",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
         backgroundColor: mainColors.secondaryColorO,
         gap: "10px",
@@ -63,7 +81,7 @@ function Login() {
       <img
         src={Icon}
         style={{
-          paddingTop: "30px",
+          paddingTop: "0px",
           height: "190px",
           marginBottom: "10px",
         }}
@@ -81,7 +99,7 @@ function Login() {
           style={{
             fontFamily: "Marcellus",
             fontWeight: "300",
-            fontSize: "15px",
+            fontSize: "16px",
             marginBottom: "0px",
             color: mainColors.primaryColor,
           }}
@@ -90,6 +108,35 @@ function Login() {
           <span style={{ textDecoration: "underline" }}>Registrate</span>
         </h2>
       </Link>
+      {camposVacios && (
+        <h2
+          style={{
+            fontFamily: "Marcellus",
+            fontWeight: "300",
+            fontSize: "12px",
+            marginBottom: "10px",
+            color: mainColors.primaryColor,
+            textAlign: "center",
+          }}
+        >
+          Favor de llenar todos los campos
+        </h2>
+      )}
+      {loginFail && (
+        <h2
+          style={{
+            fontFamily: "Marcellus",
+            fontWeight: "300",
+            fontSize: "12px",
+            marginBottom: "10px",
+            color: mainColors.primaryColor,
+            textAlign: "center",
+          }}
+        >
+          Usuario o contraseña incorrecta.
+          <br /> Por favor, inténtelo de nuevo
+        </h2>
+      )}
       <InputMail mail={mail} setMail={setMail}></InputMail>
       <InputPass pass={pass} setPass={setPass}></InputPass>
       <a
@@ -131,7 +178,7 @@ function Login() {
             "INICIAR SESIÓN"
           )
         }
-        click={() => handleLogIn()}
+        click={() => checkHandleLogin()}
       ></Button>
     </div>
   );
