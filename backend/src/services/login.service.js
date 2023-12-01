@@ -1,4 +1,4 @@
-const { findEmail } = require('./user.service')
+const { findEmail, findUser } = require('./user.service')
 const User = require('../models/user.model')
 const loginService = async (body) => {
     const {
@@ -7,7 +7,7 @@ const loginService = async (body) => {
     } = body
     const verifyEmail = await findEmail(email)
     if(verifyEmail){
-        const verifyUser = await User.findOne({where: {email: email, password: password }})
+        const verifyUser = await findUser(body)
         if(verifyUser){
             return 'USER LOGGED'
         }else{
