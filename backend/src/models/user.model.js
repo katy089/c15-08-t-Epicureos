@@ -36,8 +36,6 @@ User.init({
     },
     validator: {
         type: DataTypes.STRING,
-        
-
     }
 },
 {
@@ -51,10 +49,6 @@ User.beforeCreate(async (user) => {
   const hashedPassword = await hashPassword(user.password);
   user.password = hashedPassword;
 });
-
-User.prototype.comparePassword = async (password) => {
-    return await bcrypt.compare(password, this.password)
-} // devuelve un true o false
 
 
 module.exports = User;

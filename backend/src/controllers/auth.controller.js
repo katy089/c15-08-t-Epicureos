@@ -13,13 +13,11 @@ const registerTokenController = async (req, res) => {
 const loginController = async (req, res) => {
     try {
         const access = await loginService(req.body)
-        res.status(20).json(access)
+        res.status(200).json(access)
     } catch ({ message }) {
         res.status(400).json({ message })
     }
 }
-
-
 
 
 module.exports = { registerTokenController, loginController }
