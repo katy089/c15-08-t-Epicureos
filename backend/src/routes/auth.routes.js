@@ -1,4 +1,5 @@
 const { registerTokenController } = require('../controllers/auth.controller')
+const {loginController} = require('../controllers/login.controller')
 
 const { Router } = require('express')
 
