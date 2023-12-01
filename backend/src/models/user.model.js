@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
 const { sequelize } = require('../database')
+const bcrypt = require('bcryptjs')
+const { hashPassword } = require('../libs/handleEncrypt')
  
 
 class User extends Model {}
@@ -11,10 +13,12 @@ User.init({
         primaryKey: true
     },
     firstname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     lastname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING,
@@ -22,10 +26,16 @@ User.init({
         unique: true
     },
     password: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+        
     },
     phone: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    validator: {
+        type: DataTypes.STRING,
     }
 },
 {
@@ -34,4 +44,13 @@ User.init({
 }
 )
 
+//hook
+User.beforeCreate(async (user) => {
+  const hashedPassword = await hashPassword(user.password);
+  user.password = hashedPassword;
+});
+
+
 module.exports = User;
+
+

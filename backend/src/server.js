@@ -12,6 +12,7 @@ if(process.env.DEV) {
 // Middlewares
 server.use(cors())
 server.use(express.json())
+server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/v1', require('./routes/api.routes'))
 
