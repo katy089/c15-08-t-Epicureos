@@ -1,9 +1,8 @@
 const User = require('../models/user.model')
 
-const findEmail = async (where) => {
-
-    const result = await User.findOne({where})
-
+const findData = async (where) => {
+   const result = await User.findOne({where})
+   return !!result 
 }
 
 const createUser = async (data) => {
@@ -11,4 +10,5 @@ const createUser = async (data) => {
     return newUser
 }
 
-module.exports = { findEmail, createUser }
+
+module.exports = { findData, createUser }
