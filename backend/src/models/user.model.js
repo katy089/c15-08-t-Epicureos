@@ -13,10 +13,12 @@ User.init({
         primaryKey: true
     },
     firstname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     lastname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING,
@@ -24,9 +26,17 @@ User.init({
         unique: true
     },
     password: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+        
+    },
+    phone: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    validator: {
+        type: DataTypes.STRING,
     }
-
 },
 {
     sequelize,
@@ -39,10 +49,6 @@ User.beforeCreate(async (user) => {
   const hashedPassword = await hashPassword(user.password);
   user.password = hashedPassword;
 });
-
-User.prototype.comparePassword = async (password) => {
-    return await bcrypt.compare(password, this.password)
-} // devuelve un true o false
 
 
 module.exports = User;
