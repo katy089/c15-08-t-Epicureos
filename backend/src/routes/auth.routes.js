@@ -1,14 +1,12 @@
-const { registerTokenController, loginController } = require('../controllers/auth.controller')
+const { registerTokenController, validateController, loginController, recoverPasswordController } = require('../controllers/auth.controller')
 
 const { Router } = require('express')
 
 const router = Router()
 
-router.use('/register', registerTokenController)
-
-router.use('/login', loginController)
-
-router.use('/modify', () => { console.log('modify') })
-
+router.post('/register', registerTokenController)
+router.post('/validate', validateController)
+router.post('/login', loginController)
+router.post('/recover/:email', recoverPasswordController)
 
 module.exports = router 
