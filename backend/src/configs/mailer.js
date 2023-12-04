@@ -14,7 +14,10 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: smptAccount,
         pass: smptPassword
-    }
+    },
+    tls: {
+    rejectUnauthorized: false, // Aquí deshabilitas la verificación del certificado
+  },
 })
 
 module.exports = { transporter }

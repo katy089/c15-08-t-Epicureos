@@ -36,6 +36,11 @@ User.init({
     },
     validator: {
         type: DataTypes.STRING,
+    },
+    status: {
+        type:DataTypes.ENUM,
+        values: ['activated', 'pending', 'recover'],
+        defaultValue: 'pending'
     }
 },
 {

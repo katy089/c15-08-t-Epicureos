@@ -1,12 +1,11 @@
-const { registerService, loginService } = require('../services/auth.service')
-const { findData } = require('../services/user.service')
+const { registerService, loginService, validateUser, recoverPassword, showProfile } = require('../services/auth.service')
 
 const registerTokenController = async (req, res) => {
     try {
         const result = await registerService(req.body)
         res.status(201).json(result)
-    } catch ({message}) {
-        res.status(400).json({message})
+    } catch ({ message }) {
+        res.status(400).json({ message })
     }
 }
 
@@ -20,13 +19,26 @@ const loginController = async (req, res) => {
     }
 }
 
-const profileController = async (req,res) => {
+const validateController = async (req, res) => {
     try {
-        const user = await findData(req.body)
-        res.status(200).json(user)
-    } catch ({message}) {
-        res.status(400).json({message})        
+        const result = await validateUser(req.body)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
     }
 }
 
-module.exports = { registerTokenController, loginController, profileController }
+const recoverPasswordController = async (req, res) => {
+    try {
+        const { email } = req.params
+        const result = await recoverPassword(email)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+
+}
+
+
+
+module.exports = { registerTokenController, loginController, validateController, recoverPasswordController }
