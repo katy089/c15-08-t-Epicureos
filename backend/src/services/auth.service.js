@@ -43,13 +43,14 @@ const loginService = async (body) => {
     const user = await findData({email})
     if(!user){ throw new Error('USER_DOES_NOT_EXIST') }
     
+    if(user.status === USER_STATUS.PENDING) { throw new Error('UNVERIFIED_USER')}
+
     const hash = user.password
-    
     const verifyPassword = bcrypt.compareSync(password, hash)
    
     if(!verifyPassword){ throw new Error ('WRONG_PASSWORD') }
     
-    return 'USER LOGGED'  
+    return 'USER_LOGGED'  
 }
 
 const validateUser = async (body) => {
