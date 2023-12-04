@@ -1,0 +1,28 @@
+.input-container {
+  background-color: "#F6F6F6";
+  display: flex;
+  width: min(80%, 400px);
+  
+  justify-content: center;
+  align-items: center;
+}
+
+
+label {
+  text-transform: uppercase;
+}
+
+input {
+  background-color: "#F6F6F6";
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  width: 100%;
+  padding: 16px 17px;
+  font-size: 12px;
+  font-family: 'LEMONMILK',Helvetica, Arial;
+}
+
+.input1 {
+  border: 1px #3A2521 solid;
+}
