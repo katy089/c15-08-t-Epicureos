@@ -49,8 +49,16 @@ const loginService = async (body) => {
     const verifyPassword = bcrypt.compareSync(password, hash)
    
     if(!verifyPassword){ throw new Error ('WRONG_PASSWORD') }
+
+    const session = {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        status: user.status
+    }
     
-    return 'USER_LOGGED'  
+    return session  
 }
 
 const validateUser = async (body) => {
