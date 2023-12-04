@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Signup from './Pages/Signup.jsx'
 import Login  from './Pages/Login.jsx'
-
+import Validation from "./Pages/Validation.jsx";
 const router = createBrowserRouter([
  
    

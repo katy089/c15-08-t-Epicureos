@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Components/Button/Button";
 import { mainColors } from "../assets/colors.js";
-import { InputMail, InputPass } from "../Components/Input/Input.jsx";
+import { InputMail, InputPassLg } from "../Components/Input/Input.jsx";
 import { Link } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
@@ -38,15 +38,20 @@ function Login() {
       body: JSON.stringify({ email: mail.toLowerCase(), password: pass }),
     })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
+          setMail("");
+          setPass("");
           console.log("User Logged");
           alert("User Logged");
           setLoading(false);
           setLoginFail(false);
-        }
-        if (response.status === 400) {
+        } else if (response.status === 400) {
           console.log("User doesnt exist");
+          setMail("");
+          setPass("");
           setLoginFail(true);
+          setLoading(false);
+        } else {
           setLoading(false);
         }
       })
@@ -138,7 +143,7 @@ function Login() {
         </h2>
       )}
       <InputMail mail={mail} setMail={setMail}></InputMail>
-      <InputPass pass={pass} setPass={setPass}></InputPass>
+      <InputPassLg pass={pass} setPass={setPass}></InputPassLg>
       <a
         href="#2"
         style={{

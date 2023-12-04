@@ -7,15 +7,16 @@ import {
   InputMail,
   InputPass,
 } from "../Components/Input/Input.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BImage from "../assets/images/backgroundimage.png";
 import Icon from "../assets/images/icon.png";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
-
 import validator from "validator";
+
 function Signup() {
+  let navigate = useNavigate();
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const [lastNom, setLastNom] = useState("");
@@ -48,6 +49,7 @@ function Signup() {
   const handleSignup = async () => {
     console.log(mail, pass, firstNom, tel, lastNom);
     setLoading(true);
+    localStorage.clear();
     await fetch(`https://restaurant-c2gx.onrender.com/api/v1/auth/register/`, {
       method: "POST",
       headers: {
@@ -63,11 +65,17 @@ function Signup() {
     })
       .then((response) => {
         if (response.status === 201) {
-          console.log("User Logged");
+          console.log("User Created");
+          console.log(response);
+          localStorage.setItem("useremail", JSON.stringify(mail));
+          console.log(JSON.parse(localStorage.getItem("useremail")));
           setLoading(false);
-        }
-        if (response.status === 400) {
+          navigate("/validation");
+        } else if (response.status === 400) {
           console.log("User already exists");
+          setLoading(false);
+        } else {
+          console.log("Error creating user");
           setLoading(false);
         }
       })
