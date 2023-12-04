@@ -63,11 +63,14 @@ function Signup() {
     })
       .then((response) => {
         if (response.status === 201) {
-          console.log("User Logged");
+          console.log("User Created");
           setLoading(false);
         }
         if (response.status === 400) {
           console.log("User already exists");
+          setLoading(false);
+        } else {
+          console.log("Error creating user");
           setLoading(false);
         }
       })

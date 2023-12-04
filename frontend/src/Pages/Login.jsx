@@ -38,13 +38,17 @@ function Login() {
       body: JSON.stringify({ email: mail.toLowerCase(), password: pass }),
     })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log("User Logged");
           alert("User Logged");
           setLoading(false);
           setLoginFail(false);
         }
         if (response.status === 400) {
+          console.log("User doesnt exist");
+          setLoginFail(true);
+          setLoading(false);
+        } else {
           console.log("User doesnt exist");
           setLoginFail(true);
           setLoading(false);
