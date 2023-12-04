@@ -4,6 +4,7 @@ import './App.css';
 import { Route, Routes, Navigate } from "react-router-dom";
 import Signup from "./Pages/Signup.jsx";
 import Login from "./Pages/Login.jsx";
+import Validation from "./Pages/Validation.jsx";
 
 function App() {
   return (
@@ -11,6 +12,12 @@ function App() {
       <Route path="/" element={<Navigate to="/signup" />} />
       <Route exact path="/signup" component={Signup} element={<Signup />} />
       <Route exact path="/login" component={Login} element={<Login />} />
+      <Route
+        exact
+        path="/validation"
+        component={Validation}
+        element={<Validation />}
+      />
     </Routes>
   );
 }
