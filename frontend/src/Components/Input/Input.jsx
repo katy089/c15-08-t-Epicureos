@@ -93,6 +93,23 @@ export const InputPass = ({ pass, setPass }) => {
   );
 };
 
+export const InputPassLg = ({ pass, setPass }) => {
+  const onChangePass = (event) => {
+    setPass(event.target.value);
+  };
+
+  return (
+    <>
+      <Input
+        type="password"
+        label={"Contraseña"}
+        value={pass}
+        onChange={onChangePass}
+      />
+    </>
+  );
+};
+
 const App = () => {
   return (
     <div className="app">
