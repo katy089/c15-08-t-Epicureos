@@ -7,8 +7,7 @@ const hashPassword = async (password) => {
        bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) reject (err)
         resolve (hash)
-       }
-       )
+       })
    }) 
 
    return hashedPassword

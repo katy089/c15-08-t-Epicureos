@@ -1,0 +1,12 @@
+.character {
+  font-family: 'Marcellus',Helvetica, Arial;
+  background-color: rgba(247, 247, 247, .6);
+  font-size: 28px;
+}
+.character--selected {
+  border: none;
+  box-shadow: none;
+  color: #3A2521;
+  border-radius: 0;
+  outline: 2px solid #3A2521;
+}

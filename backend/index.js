@@ -6,7 +6,6 @@ const { connectionDatabase } = require('./src/database')
 
 const port = process.env.PORT || 3000
 const force = false
-
 server.listen( 
     port, 
     async () => {
