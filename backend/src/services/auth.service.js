@@ -1,27 +1,27 @@
 const { findData, createUser } = require('../services/user.service')
 const bcrypt = require('bcryptjs')
 const { generateRandomNumber } = require('../libs/handleRandomNumber')
-const { 
-    sendRegisterNotification, 
+const {
+    sendRegisterNotification,
     sendWelcomeMessage,
     sendRecoverMessage,
-    sendRecoveredMessage 
-    } = require('../services/email.services')
+    sendRecoveredMessage
+} = require('../services/email.services')
 const { USER_STATUS } = require('../configs/constants')
 
 
 const registerService = async (body) => {
     const { email } = body
-    
-    const user = await findData({email})
+
+    const user = await findData({ email })
     if (user) { throw new Error('USER_EXIST') }
-    
-    const validator =generateRandomNumber().toString()
+
+    const validator = generateRandomNumber().toString()
 
     const newUser = await createUser({ ...body, validator })
-    
+
     await sendRegisterNotification(newUser)
-    
+
     const session = {
         id: newUser.id,
         firstname: newUser.firstname,
@@ -37,11 +37,11 @@ const registerService = async (body) => {
 const loginService = async (body) => {
     const {
         email,
-        password 
+        password
     } = body
-
-    const user = await findData({email})
-    if(!user){ throw new Error('USER_DOES_NOT_EXIST') }
+    
+    const user = await findData({ email })
+    if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
     
     if(user.status === USER_STATUS.PENDING) { throw new Error('UNVERIFIED_USER')}
 
@@ -49,29 +49,37 @@ const loginService = async (body) => {
     const verifyPassword = bcrypt.compareSync(password, hash)
    
     if(!verifyPassword){ throw new Error ('WRONG_PASSWORD') }
+
+    const session = {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        status: user.status
+    }
     
-    return 'USER_LOGGED'  
+    return session  
 }
 
 const validateUser = async (body) => {
     const {
         email,
         code
-     } = body
+    } = body
 
-    const user = await findData({email})
-    if(!user){ throw new Error('USER_DOES_NOT_EXIST') }
-    if(user.validator !== code ) throw new Error('INVALID_CODE')
-    
-    const previousStatus= user.status 
+    const user = await findData({ email })
+    if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
+    if (user.validator !== code) throw new Error('INVALID_CODE')
+
+    const previousStatus = user.status
 
     user.status = USER_STATUS.ACTIVATE
     await user.save()
 
-    if(previousStatus === USER_STATUS.PENDING) {
-        await sendWelcomeMessage({email})
+    if (previousStatus === USER_STATUS.PENDING) {
+        await sendWelcomeMessage({ email })
     } else {
-        await sendRecoveredMessage({email})
+        await sendRecoveredMessage({ email })
     }
 
 
@@ -87,18 +95,18 @@ const validateUser = async (body) => {
 
 }
 
-const recoverPasswor = async(email) => {
-  
-    const user = await findData({email})
-    if(!user){ throw new Error('USER_DOES_NOT_EXIST') }
+const recoverPassword = async (email) => {
 
-    const validator =generateRandomNumber().toString()
+    const user = await findData({ email })
+    if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
+
+    const validator = generateRandomNumber().toString()
 
     user.validator = validator
     user.status = USER_STATUS.RECOVER
-    await user.save() 
+    await user.save()
 
-    await sendRecoverMessage({email, validator})
+    await sendRecoverMessage({ email, validator })
 
     const session = {
         id: user.id,
@@ -116,4 +124,5 @@ const recoverPasswor = async(email) => {
 
 
 
-module.exports = { registerService, loginService, validateUser, recoverPasswor, sendRecoverMessage }
+
+module.exports = { registerService, loginService, validateUser, recoverPassword, sendRecoverMessage }
