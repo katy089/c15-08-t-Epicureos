@@ -50,7 +50,6 @@ function Login() {
           setLoading(false);
         } else {
           console.log("User doesnt exist");
-          setLoginFail(true);
           setLoading(false);
         }
       })
