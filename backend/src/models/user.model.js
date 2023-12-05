@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
 const { sequelize } = require('../database')
-const bcrypt = require('bcryptjs')
 const { hashPassword } = require('../libs/handleEncrypt')
  
 
@@ -56,6 +55,6 @@ User.beforeCreate(async (user) => {
 });
 
 
-module.exports = User;
+module.exports = User; 
 
 

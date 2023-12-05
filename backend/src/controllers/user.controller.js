@@ -8,7 +8,6 @@ const profileController = async (req, res) => {
     } catch ({ message }) {
         res.status(400).json({ message })
     }
-
 }
 
 module.exports = { profileController }
