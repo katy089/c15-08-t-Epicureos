@@ -1,4 +1,4 @@
-const { registerService, loginService, validateUser, recoverPassword, showProfile } = require('../services/auth.service')
+const { registerService, loginService, validateUser, recoverPassword, newPassword} = require('../services/auth.service')
 
 const registerTokenController = async (req, res) => {
     try {
@@ -8,7 +8,6 @@ const registerTokenController = async (req, res) => {
         res.status(400).json({ message })
     }
 }
-
 
 const loginController = async (req, res) => {
     try {
@@ -36,9 +35,20 @@ const recoverPasswordController = async (req, res) => {
     } catch ({ message }) {
         res.status(400).json({ message })
     }
+}
+
+const newPasswordController = async (req, res) => {
+    try {
+        const result = await newPassword(req.body)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
 
 }
 
 
 
-module.exports = { registerTokenController, loginController, validateController, recoverPasswordController }
+
+
+module.exports = { registerTokenController, loginController, validateController, recoverPasswordController, newPasswordController }
