@@ -7,7 +7,7 @@ class Availability extends  Model {}
 Availability.init({
     id: {
         type: DataTypes.UUID,
-        toDefaultValue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },
     date: { // 5/12
@@ -34,6 +34,22 @@ Availability.init({
         type: DataTypes.ENUM,
         values: ['enabled', 'disabled'],
         defaultValue: 'enabled'
+    },
+    people1: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate: {
+            min: 0,
+            max: 40
+        }
+    },
+    people2: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate: {
+            min: 0,
+            max: 40
+        }
     },
     branchId: {
         type: DataTypes.INTEGER,
