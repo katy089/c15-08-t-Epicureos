@@ -23,12 +23,8 @@ Bookings.init({
         type: DataTypes.STRING,
         values: ['strip1', 'strip2']
     },
-    table: {
+    diners: {
         type: DataTypes.INTEGER,
-        validate: {
-            min: 1,
-            max: 6
-        }
     },
     status: {
         type: DataTypes.ENUM,
