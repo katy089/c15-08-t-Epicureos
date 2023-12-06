@@ -81,11 +81,11 @@ const validateUser = async (body) => {
 
     if (previousStatus === USER_STATUS.PENDING) {
         await sendWelcomeMessage({ email })
-    } else {
-        await sendRecoveredMessage({ email })
-    }
-
-
+    } 
+    // else {
+    //     await sendRecoveredMessage({ email })
+    // }
+    
     const session = {
         id: user.id,
         firstname: user.firstname,
@@ -123,9 +123,36 @@ const recoverPassword = async (email) => {
 
 }
 
+const newPassword = async (body) => {
+    
+    const {
+        email,
+        password
+    } = body
+
+    const user = await findData({ email })
+    if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
+    
+    user.password = password
+    await user.save()
+
+    await sendRecoveredMessage({ email })
+
+    const session = {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        status: user.status
+    }
+
+    return session
+    
+}
 
 
 
 
 
-module.exports = { registerService, loginService, validateUser, recoverPassword, sendRecoverMessage }
+
+module.exports = { registerService, loginService, validateUser, recoverPassword, sendRecoverMessage, newPassword }
