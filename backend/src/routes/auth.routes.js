@@ -1,3 +1,4 @@
+const { validateRegister } = require('../validator/auth.validator')
 const { registerTokenController, validateController, loginController, recoverPasswordController, newPasswordController } = require('../controllers/auth.controller')
 
 const { Router } = require('express')
