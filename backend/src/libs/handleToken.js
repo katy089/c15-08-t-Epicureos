@@ -1,12 +1,12 @@
-import jwt from "jsonwebtoken";
+const jwt = require('jsonwebtoken')
 
-export const generateToken = (uid) => {
+const generateToken = (uid) => {
     const expiresIn = '7d';
     const token = jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn });
     return { token, expiresIn };
 };
 
-export const generateRefreshToken = (uid, res) => {
+const generateRefreshToken = (uid, res) => {
     const expiresIn = '7d';
     const refreshToken = jwt.sign({ uid }, process.env.JWT_REFRESH, {
         expiresIn,
@@ -18,4 +18,4 @@ export const generateRefreshToken = (uid, res) => {
         expires: new Date(Date.now() + expiresIn),
     });
 };
-
+module.exports = {generateToken, generateRefreshToken}

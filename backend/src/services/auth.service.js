@@ -8,6 +8,7 @@ const {
     sendRecoveredMessage
 } = require('../services/email.services')
 const { USER_STATUS } = require('../configs/constants')
+const {generateToken} = require('../libs/handleToken')
 
 
 const registerService = async (body) => {
@@ -49,7 +50,7 @@ const loginService = async (body) => {
     const verifyPassword = bcrypt.compareSync(password, hash)
    
     if(!verifyPassword){ throw new Error ('WRONG_PASSWORD') }
-
+    const token = await generateToken({userId:user.id})
     const session = {
         id: user.id,
         firstname: user.firstname,
@@ -58,7 +59,7 @@ const loginService = async (body) => {
         status: user.status
     }
     
-    return session  
+    return {session,token}  
 }
 
 const validateUser = async (body) => {
@@ -76,6 +77,8 @@ const validateUser = async (body) => {
     user.status = USER_STATUS.ACTIVATE
     await user.save()
 
+    const token = await generateToken({userId:user.id})
+
     if (previousStatus === USER_STATUS.PENDING) {
         await sendWelcomeMessage({ email })
     } else {
@@ -91,7 +94,7 @@ const validateUser = async (body) => {
         status: user.status
     }
 
-    return session
+    return {session,token}
 
 }
 
