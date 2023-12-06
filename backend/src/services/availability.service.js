@@ -38,6 +38,6 @@ const booking = async (where) =>  {
     }
 }
 
-const addAvailability = async (data) => { await Availability.create(data)}
+const addAvailability = async (data) => await Availability.create(data)
 
 module.exports = { booking, addAvailability }
