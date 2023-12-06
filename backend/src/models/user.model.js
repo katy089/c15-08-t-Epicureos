@@ -2,7 +2,6 @@ const { Model, DataTypes } = require('sequelize')
 const { sequelize } = require('../database')
 const { hashPassword } = require('../libs/handleEncrypt')
  
-
 class User extends Model {}
 
 User.init({
