@@ -9,6 +9,7 @@ const {
 } = require('../services/email.services')
 const { USER_STATUS } = require('../configs/constants')
 const {generateToken} = require('../libs/handleToken')
+const User = require('../models/user.model')
 
 
 const registerService = async (body) => {
@@ -150,9 +151,29 @@ const newPassword = async (body) => {
     
 }
 
+const updateUserService = async(email,updateUserData) => {
+    try {
+        const user = await User.findOne({where: {email} });
+        if(!user){
+            throw new Error('USER_DOES_NOT_EXIST');
+        }
+        await user.update(updateUserData);
+        const session = {
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            status: user.status
+        };
+        return session;
+
+    } catch ({message}) {
+        throw new Error('Error updating user: ${error.message}');
+    }
+};
 
 
 
 
 
-module.exports = { registerService, loginService, validateUser, recoverPassword, sendRecoverMessage, newPassword }
+module.exports = { registerService, loginService, validateUser, recoverPassword, sendRecoverMessage, newPassword, updateUserService }
