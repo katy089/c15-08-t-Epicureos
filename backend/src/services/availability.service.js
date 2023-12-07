@@ -1,43 +1,46 @@
 const Availability = require("../models/availability.model")
+const { Op } = require('sequelize')
 
-
-const booking = async (where) =>  {
-    const result = await Availability.findOne(where)
+const stripAvailability = async (where) => {
+    const result = await Availability.findOne({ where })
     const session = {
         strip1: result.strip1,
         people1: result.people1,
         strip2: result.strip2,
         people2: result.people2
     }
-    if(session.strip1){
-        if(session.strip1 === 0){
-            return false
-        } else {
-            // const subtraction = session.people1 - session.strip1
-            if(session.strip1 >= 0 && session.people1 === 40){
-                return false
-            } else{
-                if(session.strip1 >= 0 && session.people1 >= 0 && session.people1 <= 40){
-                    return true
-                }
-            }
+    const subtractionStrip1 = session.strip1 - session.people1
+    const subtractionStrip2 = session.strip2 - session.people2
+    if (subtractionStrip1 === 0 && subtractionStrip2 === 0) {
+        return false
+    } else {
+        const amountOfPlaces = {
+            strip1: subtractionStrip1,
+            strip2: subtractionStrip2
         }
-    }else{
-        if(session.strip2 === 0){
-            return false
-        } else {
-            // const subtraction = session.people2 - session.strip2
-            if(session.strip2 >= 0 && session.people2 === 40){
-                return false
-            } else{
-                if(session.strip2 >= 0 && session.people2 >= 0 && session.people2 <= 40){
-                    return true
-                }
-            }
-        }
+        return amountOfPlaces
     }
+
 }
 
-const addAvailability = async (data) => { await Availability.create(data)}
+const dateAvailability = async () => {
+    const result = await Availability.findAll({
+        where: {
+            [Op.or]: [
+              { people1: { [Op.gte]: 0, [Op.lt]: 40 } },
+              { people2: { [Op.gte]: 0, [Op.lt]: 40 } },
+            ],
+          },
+    })
+    const formattedResult = result.map (availability => availability.date)
 
-module.exports = { booking, addAvailability }
+
+    return formattedResult
+}
+
+
+
+const addAvailability = async (data) => await Availability.create(data)
+
+module.exports = { dateAvailability, addAvailability, stripAvailability }
+

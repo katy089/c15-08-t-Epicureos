@@ -1,10 +1,28 @@
-const { booking, addAvailability } = require("../services/availability.service")
+const { addAvailability, dateAvailability, stripAvailability } = require("../services/availability.service")
 
 
-const seeAvailabilityController = async (req, res) => {
+const seePlaceAvailabilityController = async (req, res) => {
     try {
         const reservation = req.body
         const result = await booking(reservation)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+}
+const seeDateAvailabilityController = async (req, res) => {
+    try {
+        const reservation = req.body
+        const result = await dateAvailability(reservation)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+}
+const seeStripAvailabilityController = async (req, res) => {
+    try {
+        const reservation = req.body
+        const result = await stripAvailability(reservation)
         res.status(200).json(result)
     } catch ({ message }) {
         res.status(400).json({ message })
@@ -20,4 +38,4 @@ const addAvailabilityController = async (req, res) => {
     }
 }
 
-module.exports = { seeAvailabilityController, addAvailabilityController }
+module.exports = { seeStripAvailabilityController, addAvailabilityController, seeDateAvailabilityController, seePlaceAvailabilityController }
