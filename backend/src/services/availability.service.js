@@ -39,6 +39,8 @@ const dateAvailability = async () => {
 }
 
 
+
 const addAvailability = async (data) => await Availability.create(data)
 
 module.exports = { dateAvailability, addAvailability, stripAvailability }
+
