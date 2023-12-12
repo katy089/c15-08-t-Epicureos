@@ -12,7 +12,7 @@ Bookings.init({
         primaryKey: true,
     },
     date: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     schedule: {
