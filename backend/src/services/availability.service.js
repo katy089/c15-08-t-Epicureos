@@ -2,7 +2,7 @@ const { transformDate } = require("../helpers/transformDate.helper")
 const Availability = require("../models/availability.model")
 const { Op } = require('sequelize')
 
-const stripAvailability = async (where) => {
+const stripAvailability = async (data) => {
     const { date } = data
     const dateTransformed = transformDate(date)
     data = { date:dateTransformed }
