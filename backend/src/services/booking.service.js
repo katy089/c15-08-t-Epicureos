@@ -10,7 +10,7 @@ const createReservation = async (data) => {
     if (!availability) {
         throw new Error('DATE_NO_AVAILABLE')
     }
-    const strips = await stripAvailability({ date: dateTransformed })
+    const strips = await stripAvailability({date})
     if (restData.strip === "strip1") {
         if (restData.diners > strips.strip1) {
             throw new Error('QUANTITY_NOT_AVAILABLE')
@@ -36,7 +36,7 @@ const createReservation = async (data) => {
 const findReservation = (where) => Bookings.findOne({ where })
 
 const deleteReservation = (data) => {
-    
+
 }
 
 
