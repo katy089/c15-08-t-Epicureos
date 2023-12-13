@@ -1,4 +1,4 @@
-const { createReservation, findReservation, deleteReservation } = require('../services/booking.service')
+const { createReservation, findReservation, deleteReservation, findUserReservation } = require('../services/booking.service')
 
 const reservationController = async (req, res) => {
     try {
@@ -11,8 +11,8 @@ const reservationController = async (req, res) => {
 }
 const showReservationController = async (req, res) => {
     try {
-        const reservation = req.body
-        const result = await findReservation(reservation)
+        const reservation = req.params
+        const result = await findUserReservation(reservation)
         res.status(200).json(result)
     } catch ({ message }) {
         res.status(400).json({ message })
