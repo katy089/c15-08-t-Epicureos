@@ -10,7 +10,7 @@ const createReservation = async (data) => {
     if (!availability) {
         throw new Error('DATE_NO_AVAILABLE')
     }
-    const strips = await stripAvailability({date})
+    const strips = await stripAvailability({ date })
     if (restData.strip === "strip1") {
         if (restData.diners > strips.strip1) {
             throw new Error('QUANTITY_NOT_AVAILABLE')
@@ -33,10 +33,30 @@ const createReservation = async (data) => {
     return result.id.slice(-7)
 }
 
-const findReservation = (where) => Bookings.findOne({ where })
+const findReservation = async (where) => await Bookings.findOne({ where })
 
-const deleteReservation = (data) => {
+const deleteReservation = async (data) => {
+    const reservation = await findReservation({ id: data.id })
+    if (!reservation) {
+        throw new Error('NON_EXISTENT_RESERVATION')
+    }
+    const availability = await findDate({ date: reservation.date })
 
+    if (reservation.strip === "strip1") {
+        await availability.decrement({ people1: reservation.diners }, { where: { date: reservation.date } })
+    } else {
+        await availability.decrement({ people2: reservation.diners }, { where: { date: reservation.date } })
+    }
+    await Bookings.destroy({ where: { id: data.id } })
+
+    const result = {
+        id: reservation.id,
+        date: reservation.date,
+        schedule: reservation.schedule,
+        strip: reservation.strip,
+        diners: reservation.diners
+    }
+    return result
 }
 
 
