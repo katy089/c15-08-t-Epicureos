@@ -5,7 +5,6 @@ const { validateAvailability } = require('../validator/availability.validator')
 
 const router = Router()
 
-router.get('/findPlacesAvailability', seePlaceAvailabilityController)
 router.get('/findDateAvailability', seeDateAvailabilityController)
 router.get('/findStripAvailability', seeStripAvailabilityController)
 router.post('/addAvailability', validateAvailability, addAvailabilityController)

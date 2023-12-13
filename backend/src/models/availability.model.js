@@ -11,7 +11,7 @@ Availability.init({
         primaryKey: true
     },
     date: { // 5/12
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
         allowNull: false,        
     },
     strip1: {

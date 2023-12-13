@@ -12,7 +12,7 @@ Bookings.init({
         primaryKey: true,
     },
     date: {
-        type: DataTypes.UUID,
+        type: DataTypes.DATEONLY,
         allowNull: false,
     },
     schedule: {
@@ -44,7 +44,7 @@ Bookings.init({
             model: Branch,
             key: 'id'
         }
-    }    
+    }
 },
 {
     sequelize,
