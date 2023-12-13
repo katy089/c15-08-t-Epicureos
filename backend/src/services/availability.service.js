@@ -2,8 +2,9 @@ const { transformDate } = require("../helpers/transformDate.helper")
 const Availability = require("../models/availability.model")
 const { Op } = require('sequelize')
 
-const stripAvailability = async (where) => {
-    const result = await Availability.findOne({ where })
+const stripAvailability = async (data) => {
+    const dateTransformed = transformDate(data.date)
+    const result = await Availability.findOne({ where: { date: dateTransformed } })
     const session = {
         strip1: result.strip1,
         people1: result.people1,
