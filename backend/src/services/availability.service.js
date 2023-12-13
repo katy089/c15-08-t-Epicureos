@@ -50,4 +50,8 @@ const addAvailability = async (data) => {
 
 
 
+
 module.exports = { dateAvailability, addAvailability, stripAvailability, findDate }
+
+
+
