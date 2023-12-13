@@ -6,7 +6,7 @@ const { validateAvailability } = require('../validator/availability.validator')
 const router = Router()
 
 router.get('/findDateAvailability', seeDateAvailabilityController)
-router.get('/findStripAvailability', seeStripAvailabilityController)
+router.use('/findStripAvailability', seeStripAvailabilityController)
 router.post('/addAvailability', validateAvailability, addAvailabilityController)
 
 module.exports = router 
