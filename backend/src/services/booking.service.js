@@ -2,11 +2,16 @@ const Bookings = require('../models/bookings.model')
 
 const { findDate, stripAvailability } = require('./availability.service')
 const { transformDate } = require('../helpers/transformDate.helper')
+const { findData } = require('./user.service')
 
 const createReservation = async (data) => {
     const { date, ...restData } = data
     const dateTransformed = transformDate(date)
     const availability = await findDate({ date: dateTransformed })
+    const user = await findData({ id: data.userId })
+    if (!user) {
+        throw new Error('NON_EXISTENT_USER')
+    }
     if (!availability) {
         throw new Error('DATE_NO_AVAILABLE')
     }
@@ -35,6 +40,18 @@ const createReservation = async (data) => {
 
 const findReservation = async (where) => await Bookings.findOne({ where })
 
+const findUserReservation = async (data) => {
+    const user = await findData({ id: data.userId })
+    if (!user) {
+        throw new Error('NON_EXISTENT_USER')
+    }
+    const reservations = await Bookings.findAll({where: { userId: data.userId }})
+    if (!reservations) {
+        throw new Error('NON_EXISTENT_RESERVATION')
+    }
+    return reservations
+}
+
 const deleteReservation = async (data) => {
     const reservation = await findReservation({ id: data.id })
     if (!reservation) {
@@ -60,4 +77,4 @@ const deleteReservation = async (data) => {
 }
 
 
-module.exports = { createReservation, findReservation, deleteReservation }
+module.exports = { createReservation, findReservation, deleteReservation, findUserReservation }
