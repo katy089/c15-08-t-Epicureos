@@ -32,18 +32,12 @@ Availability.init({
     people1: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        validate: {
-            min: 0,
-            max: 40
-        }
+       
     },
     people2: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        validate: {
-            min: 0,
-            max: 40
-        }
+     
     },
     branchId: {
         type: DataTypes.INTEGER,

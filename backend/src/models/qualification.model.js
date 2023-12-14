@@ -6,7 +6,7 @@ const Branch = require('./branch.model')
 
 class Qualification extends Model {}
 
-Qalification.init({
+Qualification.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -20,6 +20,11 @@ Qalification.init({
     comment: {
         type: DataTypes.TEXT,
         allowNull: false,
+    },
+    status: {
+        type: DataTypes.ENUM,
+        values: ['enabled', 'disabled'],
+        defaultValue: 'disabled'
     },
     userId: {
         type: DataTypes.UUID,
