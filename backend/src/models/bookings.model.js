@@ -12,11 +12,7 @@ Bookings.init({
         primaryKey: true,
     },
     date: {
-<<<<<<< HEAD
-        type: DataTypes.STRING,
-=======
         type: DataTypes.DATEONLY,
->>>>>>> b13382350903523918d113fa679437ce95800ec8
         allowNull: false,
     },
     schedule: {
