@@ -18,6 +18,15 @@ const showReservationController = async (req, res) => {
         res.status(400).json({ message })
     }
 }
+const findReservationByIdController = async (req, res) => {
+    try {
+        const reservation = req.params
+        const result = await findReservation(reservation)
+        res.status(200).json(result)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+}
 const deleteReservationController = async (req, res) => {
     try {
         const reservation = req.body
@@ -28,4 +37,4 @@ const deleteReservationController = async (req, res) => {
     }
 }
 
-module.exports = { reservationController, showReservationController, deleteReservationController }
+module.exports = { reservationController, showReservationController, deleteReservationController, findReservationByIdController }
