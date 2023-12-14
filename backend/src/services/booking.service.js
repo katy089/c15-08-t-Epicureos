@@ -1,8 +1,8 @@
 const Bookings = require('../models/bookings.model')
-
 const { findDate, stripAvailability } = require('./availability.service')
 const { transformDate } = require('../helpers/transformDate.helper')
 const { findData } = require('./user.service')
+const { Op, literal } = require('sequelize')
 
 const createReservation = async (data) => {
     const { date, ...restData } = data
@@ -38,14 +38,22 @@ const createReservation = async (data) => {
     return result.id.slice(-7)
 }
 
-const findReservation = async (where) => await Bookings.findOne({ where })
+const findReservation = async (data) => {
+    const reservation = await Bookings.findOne({
+        where: literal(`right(id::text, 7) = '${data.reservationId}'`)
+    })
+    if(!reservation){
+        throw new Error('NON_EXISTENT_RESERVATION')
+    }
+    return reservation
+}
 
 const findUserReservation = async (data) => {
     const user = await findData({ id: data.userId })
     if (!user) {
         throw new Error('NON_EXISTENT_USER')
     }
-    const reservations = await Bookings.findAll({where: { userId: data.userId }})
+    const reservations = await Bookings.findAll({ where: { userId: data.userId } })
     if (!reservations) {
         throw new Error('NON_EXISTENT_RESERVATION')
     }
