@@ -1,9 +1,23 @@
 const { profileController } = require('../controllers/user.controller')
+const express = require('express');
+const router = express.Router();
+const {updateUserData} = require('../services/user.service.js')
 
-const { Router } = require('express')
+//Get user profile
+router.get('/profile', profileController);
 
-const router = Router()
+//Update user data
+router.patch('/user', async (req, res) => {
+    try {
 
-router.get('/profile', profileController)
+        const updatedUser = await updateUserData(req.body);
 
-module.exports = router
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+
+
+module.exports = router;
