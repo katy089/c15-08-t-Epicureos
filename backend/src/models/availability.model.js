@@ -11,24 +11,18 @@ Availability.init({
         primaryKey: true
     },
     date: { // 5/12
-        type: DataTypes.STRING,
+        type: DataTypes.DATEONLY,
         allowNull: false,        
     },
     strip1: {
         type: DataTypes.INTEGER,
         defaultValue: 40,
-        validate: {
-            min: 0,
-            max: 40
-        }
+        
     },
     strip2: {
         type: DataTypes.INTEGER,
         defaultValue: 40,
-        validate: {
-            min: 0,
-            max: 40
-        }
+        
     },
     status: {
         type: DataTypes.ENUM,
@@ -38,18 +32,12 @@ Availability.init({
     people1: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        validate: {
-            min: 0,
-            max: 40
-        }
+       
     },
     people2: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        validate: {
-            min: 0,
-            max: 40
-        }
+     
     },
     branchId: {
         type: DataTypes.INTEGER,
