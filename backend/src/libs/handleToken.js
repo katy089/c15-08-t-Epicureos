@@ -1,23 +1,21 @@
 const jwt = require('jsonwebtoken')
 
-const secret = process.env.JWT_SECRET
-const expire = process.env.JWT_EXPIRE
+const generateToken = (uid) => {
+    const expiresIn = '7d';
+    const token = jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn });
+    return { token, expiresIn };
+};
 
-const createToken = (payload, expiresIn = expire) => {
-    return jwt.sign(payload, secret, {expiresIn })
-}
+const generateRefreshToken = (uid, res) => {
+    const expiresIn = '7d';
+    const refreshToken = jwt.sign({ uid }, process.env.JWT_REFRESH, {
+        expiresIn,
+    });
 
-const validaToken = async (token) => {
-    try {
-        const result = jwt.verify(token, secret)
-        return result      
-    } catch (error) {
-        return null
-    }
-}
-
-module.exports = {
-    createToken,
-    validaToken
-}
-
+    res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: !(process.env.MODO === "developer"),
+        expires: new Date(Date.now() + expiresIn),
+    });
+};
+module.exports = {generateToken, generateRefreshToken}
