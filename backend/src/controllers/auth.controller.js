@@ -49,9 +49,8 @@ const newPasswordController = async (req, res) => {
 
 const updateUserController = async (req,res) => {
     try {
-        const {email} = req.params;
-        const updateUserData = req.body;
-        const updateUser = await updateUserService(email, updateUserData);
+        const {email} = req.params
+        const result = await updateUserService(email);
         res.status(200).json(result);
     } catch ({message}) {
         res.status(400).json({message});

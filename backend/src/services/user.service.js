@@ -19,29 +19,20 @@ const createUser = async (data) => {
     return newUser;
 };
 
-const updateUserData = async (userId, updatedData) => {
-    try {
-        const user = await User.findByPk(userId);
+const updateUserData = async (updatedData) => {
+
+        const {id, ...restData} = updatedData
+        // Buscar al usuario por su ID
+        const user = await findData({ id});
 
         if (!user) {
             throw new Error('User not found');
         }
 
-        // Update user data
-        await user.update(updatedData);
-
-        const updatedUser = {
-            id: user.id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            createdAt: user.createdAt,
-        };
-
+       console.log(id,restData);
+        const updatedUser = await User.update(restData,{where:{id:id}});
         return updatedUser;
-    } catch (error) {
-        throw new Error(`Error updating user data: ${error.message}`);
-    }
+  
 };
 
 
