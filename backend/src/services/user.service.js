@@ -12,28 +12,27 @@ const showProfile = async (user) => {
         createdAt: result.createdAt
     }
     return session
-};
+}
 
 const createUser = async (data) => {
-    const newUser = await User.create(data);
-    return newUser;
-};
+    const newUser = await User.create(data)
+    return newUser
+}
 
 const updateUserData = async (updatedData) => {
 
-        const {id, ...restData} = updatedData
-        // Buscar al usuario por su ID
-        const user = await findData({ id});
+    const { id, ...restData } = updatedData
+    // Buscar al usuario por su ID
+    const user = await findData({ id })
 
-        if (!user) {
-            throw new Error('User not found');
-        }
+    if (!user) {
+        throw new Error('User not found')
+    }
 
-       console.log(id,restData);
-        const updatedUser = await User.update(restData,{where:{id:id}});
-        return updatedUser;
-  
-};
+    console.log(id, restData);
+    const updatedUser = await User.update(restData, { where: { id: id } })
+    return updatedUser
+}
 
 
 module.exports = { findData, createUser, showProfile, updateUserData }
