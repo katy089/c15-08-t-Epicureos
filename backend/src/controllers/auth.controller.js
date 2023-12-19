@@ -12,9 +12,7 @@ const registerTokenController = async (req, res) => {
 const loginController = async (req, res) => {
     try {
         const data = req.body
-        // const dataStr = JSON.stringify(data)
-        const dataJson = JSON.parse(data)
-        const access = await loginService(dataJson)
+        const access = await loginService(data)
 
         res.status(200).json(access)
     } catch ({ message }) {
