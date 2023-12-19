@@ -8,7 +8,7 @@ const {
     sendRecoveredMessage
 } = require('../services/email.services')
 const { USER_STATUS } = require('../configs/constants')
-const {generateToken} = require('../libs/handleToken')
+const { generateToken } = require('../libs/handleToken')
 const User = require('../models/user.model')
 
 
@@ -18,7 +18,7 @@ const registerService = async (body) => {
     const user = await findData({ email })
     if (user) { throw new Error('USER_EXIST') }
 
-    const validator = generateRandomNumber().toString()
+    const validator = generateRandomNumber()
 
     const newUser = await createUser({ ...body, validator })
 
@@ -41,17 +41,17 @@ const loginService = async (body) => {
         email,
         password
     } = body
-    
+
     const user = await findData({ email })
     if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
-    
-    if(user.status === USER_STATUS.PENDING) { throw new Error('UNVERIFIED_USER')}
+
+    if (user.status === USER_STATUS.PENDING) { throw new Error('UNVERIFIED_USER') }
 
     const hash = user.password
     const verifyPassword = bcrypt.compareSync(password, hash)
-   
-    if(!verifyPassword){ throw new Error ('WRONG_PASSWORD') }
-    const token = await generateToken({userId:user.id})
+
+    if (!verifyPassword) { throw new Error('WRONG_PASSWORD') }
+    const token = await generateToken({ userId: user.id })
     const session = {
         id: user.id,
         firstname: user.firstname,
@@ -59,8 +59,8 @@ const loginService = async (body) => {
         email: user.email,
         status: user.status
     }
-    
-    return {session,token}  
+
+    return { session, token }
 }
 
 const validateUser = async (body) => {
@@ -68,7 +68,6 @@ const validateUser = async (body) => {
         email,
         code
     } = body
-
     const user = await findData({ email })
     if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
     if (user.validator !== code) throw new Error('INVALID_CODE')
@@ -78,15 +77,15 @@ const validateUser = async (body) => {
     user.status = USER_STATUS.ACTIVATE
     await user.save()
 
-    const token = await generateToken({userId:user.id})
+    const token = await generateToken({ userId: user.id })
 
     if (previousStatus === USER_STATUS.PENDING) {
         await sendWelcomeMessage({ email })
-    } 
+    }
     // else {
     //     await sendRecoveredMessage({ email })
     // }
-    
+
     const session = {
         id: user.id,
         firstname: user.firstname,
@@ -95,16 +94,17 @@ const validateUser = async (body) => {
         status: user.status
     }
 
-    return {session,token}
+    return { session, token }
 
 }
 
 const recoverPassword = async (email) => {
 
     const user = await findData({ email })
+    console.log(user)
     if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
 
-    const validator = generateRandomNumber().toString()
+    const validator = generateRandomNumber()
 
     user.validator = validator
     user.status = USER_STATUS.RECOVER
@@ -125,7 +125,7 @@ const recoverPassword = async (email) => {
 }
 
 const newPassword = async (body) => {
-    
+
     const {
         email,
         password
@@ -133,7 +133,7 @@ const newPassword = async (body) => {
 
     const user = await findData({ email })
     if (!user) { throw new Error('USER_DOES_NOT_EXIST') }
-    
+
     user.password = password
     await user.save()
 
@@ -148,13 +148,13 @@ const newPassword = async (body) => {
     }
 
     return session
-    
+
 }
 
-const updateUserService = async(email,updateUserData) => {
+const updateUserService = async (email, updateUserData) => {
     try {
-        const user = await User.findOne({where: {email} });
-        if(!user){
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
             throw new Error('USER_DOES_NOT_EXIST');
         }
         await user.update(updateUserData);
@@ -167,7 +167,7 @@ const updateUserService = async(email,updateUserData) => {
         };
         return session;
 
-    } catch ({message}) {
+    } catch ({ message }) {
         throw new Error('Error updating user: ${error.message}');
     }
 };
