@@ -1,6 +1,6 @@
 const { transporter } = require('../configs/mailer')
 
-const sendRegisterNotification = async ({ email, validator}) => {
+const sendRegisterNotification = async ({ email, validator }) => {
     await transporter.sendMail({
         from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
         to: email,
@@ -15,7 +15,7 @@ const sendRegisterNotification = async ({ email, validator}) => {
 
 }
 
-const sendWelcomeMessage  = async ({email}) => {
+const sendWelcomeMessage = async ({ email }) => {
     await transporter.sendMail({
         from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
         to: email,
@@ -27,7 +27,7 @@ const sendWelcomeMessage  = async ({email}) => {
     return true
 }
 
-const sendRecoverMessage = async ({ email, validator}) => {
+const sendRecoverMessage = async ({ email, validator }) => {
     await transporter.sendMail({
         from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
         to: email,
@@ -42,7 +42,7 @@ const sendRecoverMessage = async ({ email, validator}) => {
 
 }
 
-const sendRecoveredMessage  = async ({email}) => {
+const sendRecoveredMessage = async ({ email }) => {
     await transporter.sendMail({
         from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
         to: email,
@@ -54,10 +54,22 @@ const sendRecoveredMessage  = async ({email}) => {
     return true
 }
 
+const sendBookingNotification = async ({ email, message }) => {
+    await transporter.sendMail({
+        from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
+        to: email,
+        subject: 'Notificación de reserva confirmada',
+        html: `<h3>Le recordamos su reservación de la fecha ${message.date}
+        y hora ${message.time}`
+    })
+    return true
+}
+
 module.exports = {
-    sendRegisterNotification, 
+    sendRegisterNotification,
     sendWelcomeMessage,
     sendRecoverMessage,
-    sendRecoveredMessage 
+    sendRecoveredMessage,
+    sendBookingNotification
 }
 
