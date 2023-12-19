@@ -3,6 +3,7 @@ const { findDate, stripAvailability } = require('./availability.service')
 const { transformDate } = require('../helpers/transformDate.helper')
 const { findData } = require('./user.service')
 const { literal } = require('sequelize')
+const { sendBookingNotification } = require('./email.services')
 
 const createReservation = async (data) => {
     const { date, ...restData } = data
@@ -34,7 +35,12 @@ const createReservation = async (data) => {
         const people2 = restData.diners
         await availability.increment({ people2: people2 }, { where: { date: dateTransformed } })
     }
-
+    const email = user.email
+    const message = {
+        date,
+        time: result.schedule
+    }
+    await sendBookingNotification({email, message})
     return result.id.slice(-7)
 }
 
