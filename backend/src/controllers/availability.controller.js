@@ -10,7 +10,7 @@ const seeDateAvailabilityController = async (req, res) => {
 }
 const seeStripAvailabilityController = async (req, res) => {
     try {
-        const strip = req.body
+        const strip = req.params
         const result = await stripAvailability(strip)
         res.status(200).json(result)
     } catch ({ message }) {

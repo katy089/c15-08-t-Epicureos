@@ -33,7 +33,7 @@ User.init({
         allowNull: false
     },
     validator: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
     },
     status: {
         type:DataTypes.ENUM,
