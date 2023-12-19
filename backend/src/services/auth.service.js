@@ -57,7 +57,8 @@ const loginService = async (body) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
-        status: user.status
+        status: user.status,
+        phone: user.phone
     }
 
     return { session, token }

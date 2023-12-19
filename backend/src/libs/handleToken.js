@@ -18,4 +18,4 @@ const generateRefreshToken = (uid, res) => {
         expires: new Date(Date.now() + expiresIn),
     });
 };
-module.exports = {generateToken, generateRefreshToken}
+module.exports = { generateToken, generateRefreshToken }
