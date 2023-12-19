@@ -51,7 +51,7 @@ const loginService = async (body) => {
     const verifyPassword = bcrypt.compareSync(password, hash)
 
     if (!verifyPassword) { throw new Error('WRONG_PASSWORD') }
-    const token = await generateToken({ userId: user.id })
+    const token = generateToken({ userId: user.id })
     const session = {
         id: user.id,
         firstname: user.firstname,
