@@ -12,6 +12,7 @@ const connectionDatabase = (force) => {
     const Branch = require('../models/branch.model')
     const Availability = require('../models/availability.model')
     const Bookings = require('../models/bookings.model')
+    const Qualification = require('../models/qualification.model')
 
     User.belongsToMany(Branch, { through: 'userBranch'})
     Branch.belongsToMany(User, { through: 'userBranch' })
@@ -24,6 +25,9 @@ const connectionDatabase = (force) => {
 
     User.hasMany(Bookings, {foreignKey: 'userId'})
     Bookings.belongsTo(User, {foreignKey: 'userId'})
+
+    Bookings.hasOne(Qualification, {through: 'bookingId'})
+    Qualification.belongsTo(Bookings, {through: 'bookingId'})
 
     sequelize
        .sync({force})
