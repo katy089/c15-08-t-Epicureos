@@ -1,18 +1,17 @@
-const { createQualify, QualifyHistory } = require('../services/qualification.service')
+const { createQualify, qualifyHistory } = require('../services/qualification.service')
 
 const createQualifyController = async(req, res) => { // stars, comment, userId, bookingId
     try {
         const result = await createQualify(req.body)
-        res.status(201).json(result)
-        
+        res.status(201).json(result) 
     } catch ({ message }) {
         res.status(400).json({message})
     }
 }
 
-const userQualifyHistoryController = async(req, res) => {
+const qualifyHistoryController = async(req, res) => {
     try {
-        const result = await QualifyHistory(req.params)
+        const result = await qualifyHistory()
         res.status(200).json(result)
         
     } catch ({ message }) {
@@ -22,5 +21,5 @@ const userQualifyHistoryController = async(req, res) => {
 
 module.exports = {
     createQualifyController,
-    userQualifyHistoryController
+    qualifyHistoryController
 }
