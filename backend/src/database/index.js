@@ -29,6 +29,9 @@ const connectionDatabase = (force) => {
     Bookings.hasOne(Qualification, {through: 'bookingId'})
     Qualification.belongsTo(Bookings, {through: 'bookingId'})
 
+    User.hasMany(Qualification, {foreignKey: 'userId'})
+    Qualification.belongsTo(User, {foreignKey: 'userId'})
+
     sequelize
        .sync({force})
        .then(() => console.log('db is conected'))

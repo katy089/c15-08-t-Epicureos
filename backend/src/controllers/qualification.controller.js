@@ -11,6 +11,7 @@ const createQualifyController = async(req, res) => { // stars, comment, userId, 
 
 const qualifyHistoryController = async(req, res) => {
     try {
+        
         const result = await qualifyHistory()
         res.status(200).json(result)
         

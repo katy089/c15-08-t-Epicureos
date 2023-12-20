@@ -1,5 +1,6 @@
 
 const Qualification = require('../models/qualification.model')
+const User = require('../models/user.model')
 const { findBooking  } = require('../services/booking.service')
 const { findData } = require('../services/user.service')
 
@@ -32,7 +33,7 @@ const createQualify = async(body) => { // stars, comment, userId, bookingId
 }
 
 const qualifyHistory = async() => {
-
+   
    const qualifications = await allQualification()
 
    return qualifications
@@ -41,7 +42,20 @@ const qualifyHistory = async() => {
 
 const createBooking = async(data) => await Qualification.create(data)
 const findBookingQualification = async(where) => await Qualification.findOne(where)
-const allQualification = async(where) =>  await Qualification.findAll({where})
+const allQualification = async() =>  {
+   const result = await Qualification.findAll({
+      attributes: ['id', 'stars', 'comment'],
+      include: [
+         {
+            model: User,
+            as: 'user',
+            attributes: ['firstname', 'lastname']
+
+         }
+      ]  
+   })
+   return result
+}
 
 module.exports = {
    createQualify,
