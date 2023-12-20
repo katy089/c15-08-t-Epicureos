@@ -90,5 +90,7 @@ const deleteReservation = async (data) => {
     return result
 }
 
+const findBooking = async(where) => await Bookings.findOne(where)
 
-module.exports = { createReservation, findReservation, deleteReservation, findUserReservation }
+
+module.exports = { createReservation, findReservation, deleteReservation, findUserReservation, findBooking}

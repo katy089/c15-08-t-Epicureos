@@ -22,4 +22,4 @@ Branch.init({
     modelName: 'branch'
 })
 
-module.exports = Branch
+module.exports = Branch;

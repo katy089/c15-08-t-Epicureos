@@ -18,11 +18,15 @@ Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-0
 
 ### Technologies used for UX/UI design
 
-[![Static Badge](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma)](https://www.figma.com/)
+[![Static Badge](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma)](https://www.figma.com/file/yvtz3W2qVL0t45uRCNECTl/EPIC%C3%9AREOS?type=design&node-id=0-1&mode=design&t=aOa7JLygyQfDwwSc-0)
 
 ### Technologies used by QA
 
 [![Static Badge](https://img.shields.io/badge/Trello-000000?style=for-the-badge&logo=Trello)](https://trello.com/b/m8OnDzJK/proyecto-no-country)
+[![Static Badge](https://img.shields.io/badge/MantisBT-000000?style=for-the-badge&logo=Mantis%20Bug%20Tracker%20)](https://www.mantisbt.org/)
+![Static Badge](https://img.shields.io/badge/Google%20Sheets-000000?style=for-the-badge&logo=Google%20Sheets&logoColor=0dbf4a)
+![Static Badge](https://img.shields.io/badge/Google%20Docs-000000?style=for-the-badge&logo=Google%20Docs&logoColor=2E82EE)
+
 
 ### Technologies used for the API
 
