@@ -29,7 +29,6 @@ const updateUserData = async (updatedData) => {
         throw new Error('User not found')
     }
 
-    console.log(id, restData);
     const updatedUser = await User.update(restData, { where: { id: id } })
     return updatedUser
 }
