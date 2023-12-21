@@ -59,10 +59,20 @@ const sendBookingNotification = async ({ email, message }) => {
         from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
         to: email,
         subject: 'Notificación de reserva confirmada',
-        html: `<h3>Le recordamos su reservación de la fecha ${message.date}
-        y hora ${message.time}`
+        html: `<h3>Se registró con éxito una reserva: </h3> 
+        <h3> ID:${message.id} en la fecha ${message.date} a las ${message.time}. </h3>`
     })
     return true
+}
+const sendBookingCancelledNotification = async ({ email, message }) => {
+    await transporter.sendMail({
+        from: `"Epicureos" <${process.env.STM_ACCOUNT}>`,
+        to: email,
+        subject: 'Notificación de reserva cancelada',
+        html: `<h3>Le recordamos que su reservación:</h3> 
+        <h3>ID: ${message.id} de la fecha ${message.date}
+        a las ${message.schedule}, fue cancelada con éxito. </h3>`
+    })
 }
 
 module.exports = {
@@ -70,6 +80,7 @@ module.exports = {
     sendWelcomeMessage,
     sendRecoverMessage,
     sendRecoveredMessage,
-    sendBookingNotification
+    sendBookingNotification,
+    sendBookingCancelledNotification
 }
 
