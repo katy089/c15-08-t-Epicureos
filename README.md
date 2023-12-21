@@ -19,6 +19,9 @@ Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-0
 ### Technologies used for UX/UI design
 
 [![Static Badge](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma)](https://www.figma.com/file/yvtz3W2qVL0t45uRCNECTl/EPIC%C3%9AREOS?type=design&node-id=0-1&mode=design&t=aOa7JLygyQfDwwSc-0)
+[![Static Badge](https://img.shields.io/badge/Adobe%20Illustrator-310000?style=for-the-badge&logo=Adobe%20Illustrator)](https://www.adobe.com/ar/products/illustrator.html)
+[![Static Badge](https://img.shields.io/badge/Adobe%20Photoshop-001c25?style=for-the-badge&logo=Adobe%20Photoshop)](https://www.adobe.com/ar/products/photoshop.html)
+[![Static Badge](https://img.shields.io/badge/Canva-6e45e0?style=for-the-badge&logo=Canva)](https://www.canva.com/)
 
 ### Technologies used by QA
 
