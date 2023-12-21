@@ -48,7 +48,6 @@ const findReservation = async (data) => {
     const reservation = await Bookings.findOne({
         where: literal(`right(id::text, 7) = '${data.reservationId}'`)
     })
-    console.log(reservation)
     if (!reservation) {
         throw new Error('NON_EXISTENT_RESERVATION')
     }
