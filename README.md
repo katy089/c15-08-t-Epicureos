@@ -18,11 +18,15 @@ Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-0
 
 ### Technologies used for UX/UI design
 
-[![Static Badge](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma)](https://www.figma.com/)
+[![Static Badge](https://img.shields.io/badge/Figma-000000?style=for-the-badge&logo=figma)](https://www.figma.com/file/yvtz3W2qVL0t45uRCNECTl/EPIC%C3%9AREOS?type=design&node-id=0-1&mode=design&t=aOa7JLygyQfDwwSc-0)
 
 ### Technologies used by QA
 
 [![Static Badge](https://img.shields.io/badge/Trello-000000?style=for-the-badge&logo=Trello)](https://trello.com/b/m8OnDzJK/proyecto-no-country)
+[![Static Badge](https://img.shields.io/badge/MantisBT-000000?style=for-the-badge&logo=Mantis%20Bug%20Tracker%20)](https://www.mantisbt.org/)
+[![Static Badge](https://img.shields.io/badge/Google%20Sheets-000000?style=for-the-badge&logo=Google%20Sheets&logoColor=0dbf4a)](https://docs.google.com/spreadsheets/d/1P54xIDzeSANzp2_dtHxHCTL_DLKabtLV/edit#gid=1520003607)
+[![Static Badge](https://img.shields.io/badge/Google%20Docs-000000?style=for-the-badge&logo=Google%20Docs&logoColor=2E82EE)](https://docs.google.com/document/d/195LWTTwee6BRi-tHoqPPQMAa8d2t_id4/edit?usp=drive_link&ouid=115410776441386216774&rtpof=true&sd=true)
+
 
 ### Technologies used for the API
 
@@ -62,6 +66,7 @@ Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-0
 ![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=WhatsApp&logoColor=fff)
 ![Github](https://img.shields.io/badge/github-00000?style=for-the-badge&logo=github&color=black)
 
+*** All tags have links, except communication tags
 
 
 
