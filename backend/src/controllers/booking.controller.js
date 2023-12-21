@@ -29,7 +29,7 @@ const findReservationByIdController = async (req, res) => {
 }
 const deleteReservationController = async (req, res) => {
     try {
-        const reservation = req.body
+        const reservation = req.params
         const result = await deleteReservation(reservation)
         res.status(200).json(result)
     } catch ({ message }) {
