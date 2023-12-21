@@ -79,7 +79,7 @@ const deleteReservation = async (data) => {
     } else {
         await availability.decrement({ people2: reservation.diners }, { where: { date: reservation.date } })
     }
-    await Bookings.destroy({ where: { id: reservation.id } })
+    await Bookings.update({status: "cancelled"},{ where: { id: reservation.id } })
 
     const result = {
         id: reservation.id,
