@@ -40,7 +40,7 @@ const createReservation = async (data) => {
         date,
         time: result.schedule
     }
-    await sendBookingNotification({email, message})
+    await sendBookingNotification({ email, message })
     return result.id.slice(-7)
 }
 
@@ -48,6 +48,7 @@ const findReservation = async (data) => {
     const reservation = await Bookings.findOne({
         where: literal(`right(id::text, 7) = '${data.reservationId}'`)
     })
+    console.log(reservation)
     if (!reservation) {
         throw new Error('NON_EXISTENT_RESERVATION')
     }
@@ -55,7 +56,7 @@ const findReservation = async (data) => {
 }
 
 const findUserReservation = async (data) => {
-    const user = await findData({ id: data.userId })
+    const user = await findData(data.reservationId)
     if (!user) {
         throw new Error('NON_EXISTENT_USER')
     }
@@ -67,7 +68,7 @@ const findUserReservation = async (data) => {
 }
 
 const deleteReservation = async (data) => {
-    const reservation = await findReservation({ id: data.id })
+    const reservation = await findReservation(data)
     if (!reservation) {
         throw new Error('NON_EXISTENT_RESERVATION')
     }
@@ -78,7 +79,7 @@ const deleteReservation = async (data) => {
     } else {
         await availability.decrement({ people2: reservation.diners }, { where: { date: reservation.date } })
     }
-    await Bookings.destroy({ where: { id: data.id } })
+    await Bookings.destroy({ where: { id: reservation.id } })
 
     const result = {
         id: reservation.id,
@@ -90,7 +91,7 @@ const deleteReservation = async (data) => {
     return result
 }
 
-const findBooking = async(where) => await Bookings.findOne(where)
+const findBooking = async (where) => await Bookings.findOne(where)
 
 
-module.exports = { createReservation, findReservation, deleteReservation, findUserReservation, findBooking}
+module.exports = { createReservation, findReservation, deleteReservation, findUserReservation, findBooking }
