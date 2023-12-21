@@ -3,7 +3,8 @@ const { findDate, stripAvailability } = require('./availability.service')
 const { transformDate } = require('../helpers/transformDate.helper')
 const { findData } = require('./user.service')
 const { literal } = require('sequelize')
-const { sendBookingNotification } = require('./email.services')
+const moment = require('moment')
+const { sendBookingNotification, sendBookingCancelledNotification } = require('./email.services')
 
 const createReservation = async (data) => {
     const { date, ...restData } = data
@@ -38,9 +39,10 @@ const createReservation = async (data) => {
     const email = user.email
     const message = {
         date,
-        time: result.schedule
+        time: result.schedule,
+        id: result.id.slice(-7)
     }
-    await sendBookingNotification({email, message})
+    await sendBookingNotification({ email, message })
     return result.id.slice(-7)
 }
 
@@ -55,7 +57,7 @@ const findReservation = async (data) => {
 }
 
 const findUserReservation = async (data) => {
-    const user = await findData({ id: data.userId })
+    const user = await findData(data.reservationId)
     if (!user) {
         throw new Error('NON_EXISTENT_USER')
     }
@@ -67,7 +69,7 @@ const findUserReservation = async (data) => {
 }
 
 const deleteReservation = async (data) => {
-    const reservation = await findReservation({ id: data.id })
+    const reservation = await findReservation(data)
     if (!reservation) {
         throw new Error('NON_EXISTENT_RESERVATION')
     }
@@ -78,7 +80,16 @@ const deleteReservation = async (data) => {
     } else {
         await availability.decrement({ people2: reservation.diners }, { where: { date: reservation.date } })
     }
-    await Bookings.destroy({ where: { id: data.id } })
+    await Bookings.update({ status: "cancelled" }, { where: { id: reservation.id } })
+    const user = await findData({ id: reservation.userId })
+    const email = user.email
+    const dateTransformed = moment(reservation.date).format('DD/MM/YYYY')
+    const message = {
+        id: data.reservationId,
+        date: dateTransformed,
+        schedule: reservation.schedule
+    }
+    await sendBookingCancelledNotification({ email, message })
 
     const result = {
         id: reservation.id,
@@ -87,10 +98,11 @@ const deleteReservation = async (data) => {
         strip: reservation.strip,
         diners: reservation.diners
     }
+
     return result
 }
 
-const findBooking = async(where) => await Bookings.findOne(where)
+const findBooking = async (where) => await Bookings.findOne(where)
 
 
-module.exports = { createReservation, findReservation, deleteReservation, findUserReservation, findBooking}
+module.exports = { createReservation, findReservation, deleteReservation, findUserReservation, findBooking }
