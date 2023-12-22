@@ -1,8 +1,19 @@
-# c15-08-t-node-react
-# Web App Reserva tu mesa en tu restaurant favorito
-Este desarrollo permite al usuario crear su perfil de usuario, consultar disponibilidad, reservar, cancelar la reserva y calificar la atención.
+# Hi there! We are c15-08-t-node-react
+# WebApp Restaurant Reservations 
+This web application, developed by c15-08-t-node-react, allows users to easily make reservations for lunch or dinner by creating an account. Once a reservation is made, users will receive a confirmation email. Additionally, the system supports reservation cancellations, and users can provide feedback on the service. The application also provides functionality to update your profile information.
+## Features
 
-Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-08-t-node-reacts.onrender.com/) y listo!
+- **User Registration:** Create an account to start making reservations.
+
+- **Reservation Confirmation:** Receive a confirmation email upon successful reservation.
+
+- **Reservation Cancellation:** Easily cancel a reservation if necessary.
+
+- **Service Feedback:** Share your experience by providing feedback on the service.
+
+- **Profile Management:** Make changes to your profile information as needed.
+
+Begin using the app just clicking here [AQUÍ](https://c15-08-t-node-reacts.onrender.com/) and that's all!
 
 ## Contributors: 
 - Micaela Pellegrini: UX/UI Design
@@ -14,7 +25,7 @@ Para comenzar a utilizar la aplicacion solo debes clickear [AQUÍ](https://c15-0
 - Nicolas Raffagnini: Back End Developer
 - Rocio Baigorria: Back End Developer 
 
-# El stack tecnológico utilizado para el desarrollo del proyecto abarca varias áreas: 
+# Let's check out the tech stack: 
 
 ### Technologies used for UX/UI design
 
