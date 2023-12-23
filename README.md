@@ -13,7 +13,7 @@ This web application, developed by c15-08-t-node-react, allows users to easily m
 
 - **Profile Management:** Make changes to your profile information as needed.
 
-Begin using the app just clicking here [AQUÍ](https://c15-08-t-node-reacts.onrender.com/) and that's all!
+Begin using the app just clicking here [HERE](https://c15-08-t-node-reacts.onrender.com/) and that's all!
 
 ## Contributors: 
 - Micaela Pellegrini: UX/UI Design
