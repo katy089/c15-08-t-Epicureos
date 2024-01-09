@@ -18,9 +18,14 @@ server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/v1', require('./routes/api.routes'))
 
-cron.schedule('0 0 * * *', () => {
-  AvailabilityDates();
-});
+cron.schedule('0 0 * * *', async () => {
+  await AvailabilityDates();
+  console.log('ok')
+}, {
+   scheduled: true,
+   timezone: "America/Sao_Paulo"
+ }
+);
 
 module.exports = server
 
