@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const cron = require('node-cron');
+const { AvailabilityDates } = require('./services/availability.service');
 
 const server = express()
 
@@ -16,6 +18,9 @@ server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/v1', require('./routes/api.routes'))
 
+cron.schedule('0 0 * * *', () => {
+  AvailabilityDates();
+});
 
 module.exports = server
 
