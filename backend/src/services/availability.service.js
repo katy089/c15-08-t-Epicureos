@@ -1,6 +1,7 @@
 const { transformDate } = require("../helpers/transformDate.helper")
 const Availability = require("../models/availability.model")
 const { Op } = require('sequelize')
+const { addDays } = require('date-fns');
 
 const stripAvailability = async (data) => {
     const dateTransformed = transformDate(data.date)
@@ -50,10 +51,20 @@ const addAvailability = async (data) => {
     return availability
 }
 
+const AvailabilityDates = async() => {
 
+    const today = new Date()
+    const Week = addDays(today, 6); 
+    let currentDate = today;
+    
+    while (currentDate <= Week) {
+      await Availability.findOrCreate({ where: { date: currentDate } });
+      currentDate = addDays(currentDate, 1); 
+    }
 
+}
 
-module.exports = { dateAvailability, addAvailability, stripAvailability, findDate }
+module.exports = { dateAvailability, addAvailability, stripAvailability, findDate, AvailabilityDates }
 
 
 
