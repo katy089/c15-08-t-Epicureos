@@ -32,6 +32,12 @@ Bookings.init({
         values: ['reserved', 'arrive', 'cancelled', 'ghost'],
         defaultValue: 'reserved'
     },
+    qualify: {
+        type: DataTypes.ENUM,
+        values: ['enabled', 'disabled'],
+        defaultValue: 'enabled'
+
+    },
     userId: {
         type: DataTypes.UUID,
         references: {

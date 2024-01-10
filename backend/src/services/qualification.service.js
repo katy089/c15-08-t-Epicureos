@@ -64,7 +64,7 @@ const needToQualify = async(params) => {
    
    const userId = params.userId
    console.log(userId)
-   const toQualify = await Bookings.findOne({
+   const toQualify = await Bookings.findAll({
      where: { 
       userId, 
       status: { [Op.notIn]: ['cancelled', 'ghost'] } 
@@ -79,7 +79,19 @@ const needToQualify = async(params) => {
      ],
    })
 
-   console.log(toQualify)
+  
+   console.log(toQualify.id)
+
+   if(!toQualify) return 'ok'
+
+   const result = {
+      userId,
+      id: toQualify.bookings.dataValues.id
+   }
+
+   console.log(result)
+
+   return result
 
 }
 
