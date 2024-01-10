@@ -22,7 +22,7 @@ const qualifyHistoryController = async(req, res) => {
 const needTtoQualifyController = async(req, res) => {
     try {
         const result = await needToQualify(req.params)
-        res.status(201).json(result)        
+        res.status(200).json(result)        
     } catch ({ message }) {
         res.status(400).json({message})
     }
