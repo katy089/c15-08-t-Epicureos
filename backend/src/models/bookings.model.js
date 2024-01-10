@@ -3,6 +3,7 @@ const {sequelize} = require('../database')
 const Branch = require('./branch.model')
 const User = require('./user.model')
 
+
 class Bookings extends Model {}
 
 Bookings.init({
@@ -44,7 +45,9 @@ Bookings.init({
             model: Branch,
             key: 'id'
         }
-    }
+    },
+    
+
 },
 {
     sequelize,

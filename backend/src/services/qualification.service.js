@@ -1,8 +1,10 @@
 
+const Bookings = require('../models/bookings.model')
 const Qualification = require('../models/qualification.model')
 const User = require('../models/user.model')
 const { findBooking  } = require('../services/booking.service')
 const { findData } = require('../services/user.service')
+const { Op } = require('sequelize');
 
 const createQualify = async(body) => { // stars, comment, userId, bookingId
    const { bookingId, userId } = body
@@ -35,13 +37,13 @@ const createQualify = async(body) => { // stars, comment, userId, bookingId
 const qualifyHistory = async() => {
    
    const qualifications = await allQualification()
-
    return qualifications
 
 }
 
 const createBooking = async(data) => await Qualification.create(data)
 const findBookingQualification = async(where) => await Qualification.findOne(where)
+
 const allQualification = async() =>  {
    const result = await Qualification.findAll({
       attributes: ['id', 'stars', 'comment'],
@@ -57,7 +59,31 @@ const allQualification = async() =>  {
    return result
 }
 
+
+const needToQualify = async(userId) => {
+   
+   console.log(userId)
+   const toQualify = await Bookings.findAll({
+     where: { 
+      userId, 
+      status: { [Op.notIn]: ['cancelled', 'ghost'] } 
+     },
+     order: [['date', 'DESC']],
+     include: [
+       {
+         model: Qualification,
+         required: false,
+         defaultValue: 0, // En caso de no encontrar ninguna calificación
+       },
+     ],
+   })
+
+   console.log(toQualify)
+
+}
+
 module.exports = {
    createQualify,
-   qualifyHistory
+   qualifyHistory,
+   needToQualify
 }
