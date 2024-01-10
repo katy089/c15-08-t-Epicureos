@@ -63,30 +63,27 @@ const allQualification = async() =>  {
 const needToQualify = async(params) => {
    
    const userId = params.userId
+   const today = new Date
    console.log(userId)
-   const toQualify = await Bookings.findAll({
+   const toQualify = await Bookings.findOne({
      where: { 
       userId, 
-      status: { [Op.notIn]: ['cancelled', 'ghost'] } 
+      status: { [Op.notIn]: ['cancelled', 'ghost'] }, 
+      qualify: 'enabled',
+      date: {[Op.lt]: today}
      },
      order: [['date', 'DESC']],
-     include: [
-       {
-         model: Qualification,
-         required: false,
-         defaultValue: 0, // En caso de no encontrar ninguna calificación
-       },
-     ],
    })
 
   
-   console.log(toQualify.id)
+   console.log(toQualify)
 
    if(!toQualify) return 'ok'
 
    const result = {
+      id: toQualify.id,
+      date: toQualify.date,
       userId,
-      id: toQualify.bookings.dataValues.id
    }
 
    console.log(result)
