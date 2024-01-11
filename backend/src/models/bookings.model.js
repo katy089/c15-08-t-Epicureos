@@ -3,6 +3,7 @@ const {sequelize} = require('../database')
 const Branch = require('./branch.model')
 const User = require('./user.model')
 
+
 class Bookings extends Model {}
 
 Bookings.init({
@@ -31,6 +32,12 @@ Bookings.init({
         values: ['reserved', 'arrive', 'cancelled', 'ghost'],
         defaultValue: 'reserved'
     },
+    qualify: {
+        type: DataTypes.ENUM,
+        values: ['enabled', 'disabled'],
+        defaultValue: 'enabled'
+
+    },
     userId: {
         type: DataTypes.UUID,
         references: {
@@ -44,7 +51,9 @@ Bookings.init({
             model: Branch,
             key: 'id'
         }
-    }
+    },
+    
+
 },
 {
     sequelize,
