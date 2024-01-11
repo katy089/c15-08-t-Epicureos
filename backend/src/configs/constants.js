@@ -16,9 +16,15 @@ const BOOKING_STATUS = {
     GHOST: 'ghost'   
 }
 
+const AVALIABILITY_STATUS = {
+    ENABLED: 'enabled',
+    DISABLED: 'disabled'
+
+}
 
 module.exports = { 
     USER_STATUS,
     BOOKING_QUALIFY,
-    BOOKING_STATUS 
+    BOOKING_STATUS,
+    AVALIABILITY_STATUS
 }
