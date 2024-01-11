@@ -52,7 +52,7 @@ const addAvailability = async (data) => {
     return availability
 }
 
-const AvailabilityDates = async() => {
+const availabilityDates = async() => {
 
     const today = new Date()
     const Week = addDays(today, 7); 
@@ -87,7 +87,7 @@ module.exports = {
     addAvailability, 
     stripAvailability, 
     findDate, 
-    AvailabilityDates, 
+    availabilityDates, 
     disableDates 
 }
 

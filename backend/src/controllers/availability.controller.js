@@ -2,7 +2,7 @@ const {
     addAvailability, 
     dateAvailability, 
     stripAvailability, 
-    AvailabilityDates, 
+    availabilityDates, 
     disableDates
 } = require("../services/availability.service")
 
@@ -38,7 +38,7 @@ const addAvailabilityController = async (req, res) => {
 //create 7 days - super user o admin
 const createAvailabilityDates = async (req, res) => {
     try {
-        const result = await AvailabilityDates()
+        const result = await availabilityDates()
         res.status(200).json(result)         
     } catch ({ message }) {
         res.status(400).json({ message })        
@@ -56,8 +56,6 @@ const disablePreviousDates = async (req, res) => {
     } 
 
 }
-
-
 
 module.exports = { 
     seeStripAvailabilityController, 

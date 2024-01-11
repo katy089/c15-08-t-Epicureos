@@ -4,7 +4,8 @@ const {
     seePlaceAvailabilityController, 
     seeDateAvailabilityController, 
     seeStripAvailabilityController,
-    createAvailabilityDates  
+    createAvailabilityDates,  
+    disablePreviousDates
 } = require('../controllers/availability.controller')
 
 const { Router } = require('express')
@@ -18,7 +19,7 @@ router.post('/addAvailability', validateAvailability, addAvailabilityController)
 
 //super user o admin
 router.post('/createSeveralDate', createAvailabilityDates)
-router.patch('/disableDates',disablePreviousDates)
+router.patch('/disableDates', disablePreviousDates)
 
 
 
