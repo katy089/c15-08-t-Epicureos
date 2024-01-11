@@ -1,4 +1,5 @@
 
+const { BOOKING_QUALIFY, BOOKING_STATUS } = require('../configs/constants')
 const Bookings = require('../models/bookings.model')
 const Qualification = require('../models/qualification.model')
 const User = require('../models/user.model')
@@ -63,12 +64,15 @@ const allQualification = async() =>  {
 const needToQualify = async(params) => {
    
    const userId = params.userId
+   const verify = await findData({id: userId})
+   if (!verify) throw new Error('NON_EXISTENT_USER')
+
    const today = new Date
    const toQualify = await Bookings.findOne({
      where: { 
       userId, 
-      status: { [Op.notIn]: ['cancelled', 'ghost'] }, 
-      qualify: 'enabled',
+      status: { [Op.notIn]: [BOOKING_STATUS.CANCELLED, BOOKING_STATUS.GHOST] }, 
+      qualify: BOOKING_QUALIFY.ENABLED,
       date: {[Op.lt]: today}
      },
      order: [['date', 'DESC']],
@@ -83,13 +87,13 @@ const needToQualify = async(params) => {
    }
 
    await Bookings.update(
-   { qualify: 'disabled' },     
+   { qualify: BOOKING_QUALIFY.DISABLED },     
    {
      where: { 
       userId, 
       id: { [Op.ne]: toQualify.id },
-      status: { [Op.notIn]: ['cancelled', 'ghost'] }, 
-      qualify: 'enabled',
+      status: { [Op.notIn]: [BOOKING_STATUS.CANCELLED, BOOKING_STATUS.GHOST] }, 
+      qualify: BOOKING_QUALIFY.ENABLED,
       date: {[Op.lt]: today}
      },
      order: [['date', 'DESC']],

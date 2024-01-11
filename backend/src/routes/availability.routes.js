@@ -16,7 +16,7 @@ router.get('/findDateAvailability', seeDateAvailabilityController)
 router.use('/findStripAvailability/:date', seeStripAvailabilityController)
 router.post('/addAvailability', validateAvailability, addAvailabilityController)
 
-//create 14 days - super user o admin
+//create 7 days - super user o admin
 router.post('/createSeveralDate', createAvailabilityDates)
 
 
