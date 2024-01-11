@@ -64,7 +64,6 @@ const needToQualify = async(params) => {
    
    const userId = params.userId
    const today = new Date
-   console.log(userId)
    const toQualify = await Bookings.findOne({
      where: { 
       userId, 
@@ -75,9 +74,6 @@ const needToQualify = async(params) => {
      order: [['date', 'DESC']],
    })
 
-  
-   console.log(toQualify)
-
    if(!toQualify) return 'ok'
 
    const result = {
@@ -86,7 +82,18 @@ const needToQualify = async(params) => {
       userId,
    }
 
-   console.log(result)
+   await Bookings.update(
+   { qualify: 'disabled' },     
+   {
+     where: { 
+      userId, 
+      id: { [Op.ne]: toQualify.id },
+      status: { [Op.notIn]: ['cancelled', 'ghost'] }, 
+      qualify: 'enabled',
+      date: {[Op.lt]: today}
+     },
+     order: [['date', 'DESC']],
+   })
 
    return result
 
