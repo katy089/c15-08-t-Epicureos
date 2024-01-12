@@ -63,6 +63,8 @@ const availabilityDates = async() => {
       currentDate = addDays(currentDate, 1); 
     }
 
+    return true
+
 }
 
 const disableDates = async() => {
