@@ -55,14 +55,14 @@ const addAvailability = async (data) => {
 const availabilityDates = async() => {
 
     const today = new Date()
-    const Week = addDays(today, 7); 
+    const Week = addDays(today, 6); 
     let currentDate = today;
     
     while (currentDate <= Week) {
       await Availability.findOrCreate({ where: { date: currentDate } });
       currentDate = addDays(currentDate, 1); 
     }
-
+    console.log('ok')
     return true
 
 }
@@ -71,7 +71,7 @@ const disableDates = async() => {
 
     const today = new Date()
 
-    const result = await Availability.update(
+    await Availability.update(
       { status: AVALIABILITY_STATUS.DISABLED},     
       {
        where: { 
@@ -79,8 +79,8 @@ const disableDates = async() => {
        status: AVALIABILITY_STATUS.ENABLED,
       }
    })
-
-   if (!result) return false
+   console.log('disable') 
+   
    return true
 }
 
