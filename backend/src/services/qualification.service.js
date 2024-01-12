@@ -11,17 +11,20 @@ const createQualify = async(body) => { // stars, comment, userId, bookingId
    const { bookingId, userId } = body
    
    let id = bookingId
-   const booking = await findBooking ({id}) 
-   if(!booking) { throw new Error('BOOKING_NO_EXIT') }
+   const bookings = await findBooking ({id}) 
+   if(!bookings) { throw new Error('BOOKING_NO_EXIT') }
 
-   const bookings = await findBookingQualification ({bookingId}) 
-   if(bookings) { throw new Error('BOOKING_HAS_ALREADY_BEEN_RATED') }
+   const booking = await findBookingQualification ({bookingId}) 
+   if(booking) { throw new Error('BOOKING_HAS_ALREADY_BEEN_RATED') }
    
    id = userId
    const user = await findData({id})
    if(!user){ throw new Error('USER_DOES_NOT_EXIST') }
 
    const newQualify = await createBooking({...body})
+
+   bookings.qualify = BOOKING_QUALIFY.DISABLED
+   await bookings.save()
 
    const session = {
        id: newQualify.id,
