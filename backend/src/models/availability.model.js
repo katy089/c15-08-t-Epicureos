@@ -10,7 +10,7 @@ Availability.init({
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
     },
-    date: { // 5/12
+    date: { 
         type: DataTypes.DATEONLY,
         allowNull: false,        
     },

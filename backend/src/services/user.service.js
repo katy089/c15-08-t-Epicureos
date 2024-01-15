@@ -4,6 +4,7 @@ const findData = async (where) => await User.findOne({ where })
 
 const showProfile = async (user) => {
     const result = await findData(user)
+    if (!result) { throw new Error('USER_EXIST') }
     const session = {
         id: result.id,
         firstname: result.firstname,

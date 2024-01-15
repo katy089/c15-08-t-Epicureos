@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const cron = require('node-cron');
+const { disablePreviousDates, createAvailabilityDates } = require('./controllers/availability.controller');
 
 const server = express()
 
@@ -16,6 +18,22 @@ server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/v1', require('./routes/api.routes'))
 
+cron.schedule('0 0 * * *', async () => {
+      await createAvailabilityDates();
+
+}, {
+   scheduled: true,
+   timezone: "America/Sao_Paulo"
+ }
+);
+
+cron.schedule('0 0 * * *', async () => {
+   await disablePreviousDates()
+}, {
+   scheduled: true,
+   timezone: "America/Sao_Paulo"
+ }
+);
 
 module.exports = server
 
