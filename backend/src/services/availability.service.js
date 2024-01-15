@@ -62,6 +62,7 @@ const availabilityDates = async() => {
       await Availability.findOrCreate({ where: { date: currentDate } });
       currentDate = addDays(currentDate, 1); 
     }
+    console.log('ok')
     
     return true
 
@@ -79,6 +80,7 @@ const disableDates = async() => {
        status: AVALIABILITY_STATUS.ENABLED,
       }
    })
+   console.log('delete')
    
    return true
 }
