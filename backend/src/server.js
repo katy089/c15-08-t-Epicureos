@@ -27,7 +27,7 @@ cron.schedule('0 0 * * *', async () => {
  }
 );
 
-cron.schedule('0 0 * * *', async () => {
+cron.schedule('0 0 */1 */1 */1', async () => {
    await disablePreviousDates()
 }, {
    scheduled: true,
