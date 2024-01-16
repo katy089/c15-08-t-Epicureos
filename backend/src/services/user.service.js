@@ -10,7 +10,8 @@ const showProfile = async (user) => {
         firstname: result.firstname,
         lastname: result.lastname,
         email: result.email,
-        createdAt: result.createdAt
+        phone: result.phone,
+        password: result.password
     }
     return session
 }
@@ -21,15 +22,20 @@ const createUser = async (data) => {
 }
 
 const updateUserData = async (updatedData) => {
-
-    const { id, ...restData } = updatedData
+    //agregar cambio de contraseña
+    const { id, password, ...restData } = updatedData
     // Buscar al usuario por su ID
+
     const user = await findData({ id })
 
     if (!user) {
         throw new Error('User not found')
     }
 
+    if (password != user.password) {
+        user.password = password
+        await user.save()
+    }
     const updatedUser = await User.update(restData, { where: { id: id } })
     return updatedUser
 }
