@@ -1,4 +1,4 @@
-const { showProfile } = require('../services/user.service')
+const { showProfile, updateUserData } = require('../services/user.service')
 
 const profileController = async (req, res) => {
     try {
@@ -9,5 +9,13 @@ const profileController = async (req, res) => {
         res.status(400).json({ message })
     }
 }
+const updateProfileController = async (req, res) => {
+    try {
+        const updatedUser = await updateUserData(req.body)
+        res.status(200).json(updatedUser)
+    } catch ({ message }) {
+        res.status(400).json({ message })
+    }
+}
 
-module.exports = { profileController }
+module.exports = { profileController, updateProfileController }
