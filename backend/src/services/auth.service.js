@@ -126,7 +126,7 @@ const recoverPassword = async (email) => {
 }
 
 const newPassword = async (body) => {
-
+    
     const {
         email,
         password

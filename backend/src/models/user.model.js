@@ -51,8 +51,7 @@ User.init({
 User.beforeCreate(async (user) => {
   const hashedPassword = await hashPassword(user.password);
   user.password = hashedPassword;
-});
-
+})
 
 module.exports = User; 
 
