@@ -18,7 +18,7 @@ server.use(express.urlencoded({ extended: true }))
 
 server.use('/api/v1', require('./routes/api.routes'))
 
-cron.schedule('* */1 * * *', async () => {
+cron.schedule('15 */1 * * *', async () => {
       await createAvailabilityDates();
 
 }, {
@@ -27,7 +27,7 @@ cron.schedule('* */1 * * *', async () => {
  }
 );
 
-cron.schedule('* */1 * * *', async () => {
+cron.schedule('15 */1 * * *', async () => {
    await disablePreviousDates()
 }, {
    scheduled: true,
