@@ -16,8 +16,7 @@ This web application, developed by c15-08-t-node-react, allows users to easily m
 Begin using the app just clicking here [HERE](https://c15-08-t-node-reacts.onrender.com/) and that's all!
 
 **Deploy de la app**
-¿Cómo veo en local el Front y el Back ? 1ro: copiar el repositorio con: git clone https://github.com/katy089/s13-05-t-node-react.git
-
+¿Cómo veo en local el Front y el Back ? 1ro: copiar el repositorio con: git clone https://github.com/katy089/c15-08-t-Epicureos.git
 -> Instación de dependencias: $ npm install
 
 -> Para correr la app:
